@@ -1,34 +1,51 @@
 .footer {
-  background-color: var(--gray-100); /* Fixed hyphen issue */
-  color: var(--text-dark); /* Fixed hyphen issue */
-  padding: 2rem;
-  text-align: center;
-  border-top: 1px solid var(--gray-300); /* Fixed hyphen issue */
+  background-color: var(--gray-700);
+  color: var(--white);
+  padding: 2rem 1rem;
+  border-top: 4px solid var(--primary);
 }
 
 .footerContent {
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
 }
 
-a {
-  color: var(--primary);
-  text-decoration: none;
-  transition: color 0.3s;
+.section {
+  flex: 1 1 250px;
+}
 
-  &:hover {
-    color: var(--primary-light); /* Fixed hyphen issue */
-  }
+.section p,
+.section a {
+  color: var(--gray-300);
+  font-size: 0.95rem;
+  margin: 0.5rem 0;
+  text-align: left;
+}
+
+.section a:hover {
+  color: var(--primary-light);
 }
 
 .socialLinks {
   list-style: none;
   padding: 0;
-  margin: 1rem 0;
   display: flex;
-  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
 
-  li {
-    margin: 0 1rem;
-  }
+.socialLink {
+  color: var(--white);
+  font-weight: bold;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.socialLink:hover {
+  color: var(--primary-light);
 }
