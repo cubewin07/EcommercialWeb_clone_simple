@@ -1,0 +1,29 @@
+:root {
+  --primary: #008080;       /* Teal instead of Shopee orange */
+  --primary-light: #339999; /* Slightly lighter for hover states */
+  --white: #ffffff;
+  --gray-100: #f5f5f5;
+  --gray-300: #cccccc;
+  --gray-500: #888888;
+  --gray-700: #444444;
+  --text-dark: #222222;
+}
+
+/* 2. Reset & global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--gray-100);
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
