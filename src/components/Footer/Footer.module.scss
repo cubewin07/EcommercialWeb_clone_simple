@@ -1,7 +1,7 @@
 .footer {
   background-color: var(--gray-700);
   color: var(--white);
-  padding: 2rem 1rem;
+  padding: 2.5rem 1rem;
   border-top: 4px solid var(--primary);
 }
 
@@ -11,8 +11,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-start;
   gap: 2rem;
+  text-align: left;
 }
 
 .section {
@@ -24,28 +24,41 @@
   color: var(--gray-300);
   font-size: 0.95rem;
   margin: 0.5rem 0;
-  text-align: left;
+}
+
+.section a {
+  display: inline-block;
+  padding: 0.25rem 0.5rem; /* Pre-applied padding */
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
 
 .section a:hover {
-  color: var(--primary-light);
+  background-color: var(--hover-highlight);
+  color: var(--accent);
+  transform: scale(1.03);
 }
 
 .socialLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   list-style: none;
   padding: 0;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
 .socialLink {
-  color: var(--white);
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1rem;
-  transition: color 0.3s;
-}
+  color: var(--white);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
 
-.socialLink:hover {
-  color: var(--primary-light);
+  &:hover {
+    background-color: var(--hover-highlight);
+    color: var(--accent);
+    transform: scale(1.03);
+  }
 }
