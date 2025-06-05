@@ -12,11 +12,13 @@ function Banner({ images }) {
     useEffect(() => {
         timer.current = setInterval(() => {
             setIndex( prevIndex => prevIndex === totalImages - 1 ? 0 : prevIndex + 1);
-            if(isChanging) {
-                setIsChanging(false);
-            }
         }, TIME_CHANGE); // Change image every 3 seconds
-        return () => clearInterval(timer.current); // Cleanup interval on component unmount
+
+
+        return () => {
+            clearInterval(timer.current); // Cleanup interval on component unmount
+            setIsChanging(false); // Reset changing state when the component unmounts
+        }
     }, [totalImages, isChanging]);
 
     const handleChangeImage = (newIndex) => {
@@ -26,6 +28,9 @@ function Banner({ images }) {
             clearInterval(timer.current); // Clear the existing timer
         }
     };
+
+    console.log(isChanging);
+
     return ( 
         <div className={styles.banner}>
             <img src={images[index]} alt="Banner" className={styles.bannerImage} />
