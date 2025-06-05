@@ -1,0 +1,49 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--primary); /* Set primary color as background */
+}
+
+.logo {
+  img {
+    height: 50px;
+    width: auto;
+  }
+}
+
+.nav {
+  ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navItem {
+    margin: 0 1rem;
+
+    .navLink {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+
+      &:hover {
+        color: var(--primary-light); /* Use primary-light for hover */
+      }
+    }
+  }
+
+  .loginItem {
+    .navLink {
+      font-weight: bold;
+      color: #007bff;
+
+      &:hover {
+        color: var(--primary-light); /* Use primary-light for hover */
+      }
+    }
+  }
+}

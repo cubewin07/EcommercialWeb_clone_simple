@@ -2,9 +2,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 1rem;
-  background-color: var(--primary); /* Set primary color as background */
-  border-bottom: 1px solid #ddd;
+  max-width: 1200px; /* Match layout max-width */
+  width: 100%;
+  margin: 0 auto; /* Center the header */
+  z-index: 3;
+  position: fixed;
+  top: 0;
 }
 
 .logo {

@@ -5,13 +5,16 @@ import Footer from "../components/Footer/Footer";
 
 function Layout() {
     return ( 
-        <div>
-            <Header />
-            <main>
-                <Outlet />
-            </main>
+        <>
+            <div className="fixed-header-color"></div>
+            <div className="layout">
+                <Header />
+                <main className="main-content">
+                    <Outlet />
+                </main>
+            </div>
             <Footer />
-        </div>
+        </>
      );
 }
 
