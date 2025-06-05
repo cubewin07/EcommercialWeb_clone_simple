@@ -1,9 +1,22 @@
+import styles from './Home.module.scss';
+import Banner from './Banner/Banner.js'
+
+const importAll = (r) => r.keys().map(r);
+const images = importAll(require.context('../../assets/banners', false, /\.(png|jpe?g|svg)$/));
+
+
+
+console.log(images.length);
 function Home() {
     return ( 
-        <div>
-            <h1>Welcome to the Home Page</h1>
-            <p>This is the main landing page of our application.</p>
-        </div>
+        <div className={styles.home}>
+            <div className={styles.banner}>
+                <Banner images={images} />
+            </div>
+            <div className={styles.featuredProducts}>
+                {/* <FeaturedProducts/> */}
+            </div>
+        </div>                                       
      );
 }
 
