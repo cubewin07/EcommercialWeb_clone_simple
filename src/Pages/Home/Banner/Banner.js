@@ -29,7 +29,7 @@ function Banner({ images }) {
     return ( 
         <div className={styles.banner}>
             <img src={images[index]} alt="Banner" className={styles.bannerImage} />
-            {/* <div className={styles.bannerDots}>
+            <div className={styles.bannerDots}>
                 {images.map((_, i) => (
                     <span 
                         key={i} 
@@ -37,7 +37,7 @@ function Banner({ images }) {
                         onClick={() => setIndex(i)}
                     ></span>
                 ))}
-            </div> */}
+            </div>
             <div className={styles.ChangeBanner}>
                 <button 
                     className={styles.prevButton}
