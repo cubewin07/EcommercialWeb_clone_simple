@@ -3,6 +3,7 @@
   width: 100%;
   height: 400px; /* Set a fixed height for the banner */
   overflow: hidden;
+  margin-top: 1.6rem; /* Converted 1rem to 1.6rem */
 
   &:hover .ChangeBanner {
     opacity: 1; /* Show buttons on hover */
@@ -21,7 +22,8 @@
   flex-shrink: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensure the image covers the entire banner area */
+  object-fit: cover;
+  background-color: var(--gray-700);
 }
 
 .bannerDots {
@@ -34,8 +36,8 @@
 }
 
 .dot {
-  width: 10px;
-  height: 10px;
+  width: 1rem; /* Converted 10px to 1rem */
+  height: 1rem; /* Converted 10px to 1rem */
   background-color: var(--gray-300);
   border-radius: 50%;
   cursor: pointer;
@@ -63,9 +65,9 @@
   background-color: var(--primary);
   color: var(--white);
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1.6rem; /* Converted 0.5rem 1rem to 0.8rem 1.6rem */
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 2.4rem; /* Converted 1.5rem to 2.4rem */
   border-radius: 4px;
   transition: background-color 0.3s, transform 0.2s;
 

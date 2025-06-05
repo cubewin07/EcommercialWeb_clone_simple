@@ -7,7 +7,7 @@
   margin: 0 auto; /* Center the header */
   z-index: 3;
   position: fixed;
-  top: 0;
+  // padding: 1.6rem 3.2rem; /* Converted 1rem 2rem to 1.6rem 3.2rem */
 }
 
 .logo {
@@ -15,7 +15,7 @@
   align-items: center;
 
   img {
-    height: 70px; /* Increased height */
+    height: 8rem; /* Converted 50px to 8rem */
     width: auto; /* Maintain aspect ratio */
     margin-right: 0.5rem; /* Add spacing between image and text */
     filter: brightness(0) invert(1); /* Adjust logo color to white */
@@ -33,18 +33,19 @@
   ul {
     display: flex;
     list-style: none;
-    margin: 0;
+    margin-right: -1.5rem;
     padding: 0;
   }
 
   .navItem,
   .loginItem {
-    margin: 0 1rem;
+    margin: 0 1.6rem; /* Converted 1rem to 1.6rem */
 
     .navLink {
       display: inline-block;
       text-decoration: none;
       color: #222;
+      font-size: 1.6rem; /* Converted 1rem to 1.6rem */
       font-weight: 500;
       padding: 0.25rem 0.5rem; // ✨ padding added here for stability
       border-radius: 4px;

@@ -22,7 +22,7 @@
 .section p,
 .section a {
   color: var(--gray-300);
-  font-size: 0.95rem;
+  font-size: 1.52rem; /* Converted 0.95rem to 1.52rem (1rem = 10px scale) */
   margin: 0.5rem 0;
 }
 
@@ -42,15 +42,15 @@
 .socialLinks {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.6rem; /* Already in rem, no change needed */
   list-style: none;
   padding: 0;
-  margin-top: 1rem;
+  margin-top: 1.6rem; /* Already in rem, no change needed */
 }
 
 .socialLink {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.6rem; /* Already in rem, no change needed */
   color: var(--white);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
