@@ -22,15 +22,15 @@ function Banner({ images }) {
     }, [totalImages, isChanging]);
 
     const handleChangeImage = (newIndex) => {
-        setIsChanging(true);
-        setIndex(newIndex);
         if (timer.current) {
             clearInterval(timer.current); // Clear the existing timer
         }
+        setIsChanging(true);
+        // setIndex(newIndex);
+        return newIndex; // Return the new index to be set
     };
 
-    console.log(isChanging);
-
+    console.log( `Current index: ${index}, Total images: ${totalImages}`);
     return ( 
         <div className={styles.banner}>
             <img src={images[index]} alt="Banner" className={styles.bannerImage} />
