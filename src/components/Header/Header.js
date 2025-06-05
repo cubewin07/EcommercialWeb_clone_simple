@@ -4,7 +4,9 @@ function Header() {
     return ( 
         <header className={styles.header}>
             <div className={styles.logo}>
-                <img src="/logo.png" alt="Logo" />
+                <Link to="/" className={styles.logoLink}>
+                    <img src="/assets/Images/ShopLogo.png" alt="MyShop Logo" className={styles.logoImage} />
+                </Link>
             </div>
             <nav className={styles.nav}>
                 <ul className={styles.navList}>

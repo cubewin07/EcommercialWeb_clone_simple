@@ -2,15 +2,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   background-color: var(--primary); /* Set primary color as background */
   border-bottom: 1px solid #ddd;
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+
   img {
-    height: 50px;
-    width: auto;
+    height: 70px; /* Increased height */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 0.5rem; /* Add spacing between image and text */
+    filter: brightness(0) invert(1); /* Adjust logo color to white */
+  } 
+
+  .logoText {
+    color: var(--white); /* Updated to white for contrast */
+    font-size: 1.5rem; /* Increased font size */
+    font-weight: bold;
+    text-transform: uppercase;
   }
 }
 
