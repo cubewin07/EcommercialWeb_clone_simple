@@ -6,7 +6,6 @@ const images = importAll(require.context('../../assets/banners', false, /\.(png|
 
 
 
-console.log(images.length);
 function Home() {
     return ( 
         <div className={styles.home}>
