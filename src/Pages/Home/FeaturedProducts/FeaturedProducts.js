@@ -78,7 +78,7 @@ function FeaturedProducts() {
                     </div>
                 </div>
                 <NavigationButton handleNext={handleNext} handlePrev={handlePrev}  type="next"/>
-                <NavigationButton handleNext={handleNext} handlePrev={handlePrev} type="back" />
+                <NavigationButton handleNext={handleNext} handlePrev={handlePrev} type="prev" />
             </section>
       );
 }
