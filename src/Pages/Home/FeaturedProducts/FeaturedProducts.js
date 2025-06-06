@@ -62,7 +62,7 @@ function FeaturedProducts() {
                 <div className={styles.productList}>
                     <div
                         className={styles.productWrapper}
-                        style={{ transform: `translateX(-${(currentIndex / productsPerPage) * 100}%)` }}
+                        style={{ transform: `translateX(-${(currentIndex / productsPerPage) * 100 + 1.7}%)` }}
                     >
                         {FeaturedProductsData.map((product) => (
                             <div key={product.id} className={styles.productCard}>
