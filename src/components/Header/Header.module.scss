@@ -5,6 +5,7 @@
   max-width: 1200px; /* Match layout max-width */
   width: 100%;
   margin: 0 auto; /* Center the header */
+  margin-top: -1.6rem; /* Converted 1rem to 1.6rem */
   z-index: 3;
   position: fixed;
   // padding: 1.6rem 3.2rem; /* Converted 1rem 2rem to 1.6rem 3.2rem */
@@ -15,7 +16,7 @@
   align-items: center;
 
   img {
-    height: 8rem; /* Converted 50px to 8rem */
+    height: 10rem; /* Converted 50px to 8rem */
     width: auto; /* Maintain aspect ratio */
     margin-right: 0.5rem; /* Add spacing between image and text */
     filter: brightness(0) invert(1); /* Adjust logo color to white */

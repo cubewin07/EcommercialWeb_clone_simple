@@ -1,6 +1,6 @@
 import styles from './Home.module.scss';
 import Banner from './Banner/Banner.js'
-
+import FeaturedProducts from './FeaturedProducts/FeaturedProducts.js';  
 const importAll = (r) => r.keys().map(r);
 const images = importAll(require.context('../../assets/banners', false, /\.(png|jpe?g|svg)$/));
 
@@ -12,9 +12,9 @@ function Home() {
             <div className={styles.banner}>
                 <Banner images={images} />
             </div>
-            <div className={styles.featuredProducts}>
-                {/* <FeaturedProducts/> */}
-            </div>
+            {/* <div className={styles.featuredProducts}> */}
+                <FeaturedProducts/>
+            {/* </div> */}
         </div>                                       
      );
 }

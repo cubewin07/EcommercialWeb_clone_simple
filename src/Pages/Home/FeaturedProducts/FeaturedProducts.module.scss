@@ -1,0 +1,145 @@
+/* FeaturedProducts.module.scss */
+
+.featuredProducts {
+  padding: 2rem;
+  margin-top: 2rem;
+  background-color: var(--gray-100);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+
+  .title {
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 2rem;
+  }
+
+  .productList {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    .productWrapper {
+      display: flex;
+      gap: 2rem; /* Two gaps of 2rem each (between 3 cards) */
+      transition: transform 0.5s ease-in-out;
+    }
+  }
+
+  .productCard {
+    /* Because there are 3 cards per “page” and 2 gaps of 2rem each,
+       each card must be exactly (100% - 4rem) / 3 wide. */
+    flex: 0 0 calc((100% - 4rem) / 3);
+    max-width: calc((100% - 4rem) / 3);
+    box-sizing: border-box;
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .productImage {
+      position: relative;
+      width: 100%;
+      padding-top: 75%;
+      overflow: hidden;
+      border-bottom: 1px solid var(--gray-200);
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      & > .hotTag {
+        position: absolute;
+        z-index: 2;
+        top: 0.8rem;
+        right: 0.8rem;
+        background-color: var(--accent);
+        color: var(--white);
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        text-transform: uppercase;
+      }
+    }
+
+    .productName {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--text-dark);
+      margin: 1rem 0 0.5rem;
+    }
+
+    .productPrice {
+      font-size: 1.6rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .addToCartButton {
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.8rem 1.6rem;
+      font-size: 1.4rem;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      transition: background-color 0.3s, transform 0.2s;
+
+      &:hover {
+        background-color: var(--primary-light);
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .navigationButton {
+    position: absolute;
+    top: 50%; /* Adjusted position to avoid covering images */
+    transform: translateY(-50%);
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 1rem;
+    font-size: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      background-color: var(--primary-light);
+      transform: translateY(-50%) scale(1.2); /* Scale animation on hover */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect */
+    }
+
+    &:active {
+      transform: translateY(-50%) scale(1); /* Reset scale on click */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+    }
+  }
+
+  .prevButton {
+    left: -2rem; /* Adjusted to move outside the product card area */
+  }
+
+  .nextButton {
+    right: -2rem; /* Adjusted to move outside the product card area */
+  }
+}
