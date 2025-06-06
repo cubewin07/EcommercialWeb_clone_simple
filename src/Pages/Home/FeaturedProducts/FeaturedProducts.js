@@ -37,6 +37,24 @@ const FeaturedProductsData = [
         name: "Product 6",
         price: "$69.99",
         image: "/assets/images/product6.jpg"
+    },
+    {
+        id: 6,
+        name: "Product 6",
+        price: "$69.99",
+        image: "/assets/images/product6.jpg"
+    },
+    {
+        id: 6,
+        name: "Product 6",
+        price: "$69.99",
+        image: "/assets/images/product6.jpg"
+    },
+    {
+        id: 6,
+        name: "Product 6",
+        price: "$69.99",
+        image: "/assets/images/product6.jpg"
     }
 ];
 
@@ -56,31 +74,50 @@ function FeaturedProducts() {
         }
     };
 
+    console.log(currentIndex >= FeaturedProductsData.length - 3);
+
     return (
-            <section className={styles.featuredProducts}>
-                <h2 className={styles.title}>Featured Products</h2>
-                <div className={styles.productList}>
-                    <div
-                        className={styles.productWrapper}
-                        style={{ transform: `translateX(-${(currentIndex / productsPerPage) * 100 + 1.7}%)` }}
-                    >
-                        {FeaturedProductsData.map((product) => (
-                            <div key={product.id} className={styles.productCard}>
-                                <div className={styles.productImage}>
-                                    <span className={styles.hotTag}>Hot</span>
-                                    <img src={product.image} alt={product.name} />
-                                </div>
-                                <h3 className={styles.productName}>{product.name}</h3>
-                                <p className={styles.productPrice}>{product.price}</p>
-                                <button className={styles.addToCartButton}>Add to Cart</button>
+        <section className={styles.featuredProducts}>
+            <h2 className={styles.title}>Featured Products</h2>
+            <div className={styles.productList}>
+                <div
+                    className={styles.productWrapper}
+                    style={{
+                        transform: `translateX(-${
+                            (currentIndex / productsPerPage === 0
+                                ? 0
+                                : (currentIndex / productsPerPage) * 100 + (1.7 * currentIndex / 3))
+                        }%)`
+                    }}
+                >
+                    {FeaturedProductsData.map((product) => (
+                        <div key={product.id} className={styles.productCard}>
+                            <div className={styles.productImage}>
+                                <span className={styles.hotTag}>Hot</span>
+                                <img src={product.image} alt={product.name} />
                             </div>
-                        ))}
-                    </div>
+                            <h3 className={styles.productName}>{product.name}</h3>
+                            <p className={styles.productPrice}>{product.price}</p>
+                            <button className={styles.addToCartButton}>Add to Cart</button>
+                        </div>
+                    ))}
                 </div>
-                <NavigationButton handleNext={handleNext} handlePrev={handlePrev}  type="next"/>
-                <NavigationButton handleNext={handleNext} handlePrev={handlePrev} type="prev" />
-            </section>
-      );
+            </div>
+
+            <NavigationButton
+                disabled={currentIndex >= FeaturedProductsData.length - 3}
+                handleNext={handleNext}
+                handlePrev={handlePrev}
+                type="next"
+            />
+            <NavigationButton
+                disabled={currentIndex < productsPerPage}
+                handleNext={handleNext}
+                handlePrev={handlePrev}
+                type="prev"
+            />
+        </section>
+    );
 }
 
 export default FeaturedProducts;

@@ -1,11 +1,15 @@
 import clsx from 'clsx';
 import styles from './NavigationButton.module.scss';
 
-function NavigationButton({ handleNext, handlePrev, type }) {
+function NavigationButton({ handleNext, handlePrev, type, disabled }) {
+
+    console.log(disabled);
 
     const className = clsx(styles.navigationButton, {
         [styles.nextButton]: type === 'next',
         [styles.prevButton]: type === 'prev',
+        [styles.disabled]: disabled
+
     });
 
     const eventHandler = type === 'next' ? handleNext : handlePrev;

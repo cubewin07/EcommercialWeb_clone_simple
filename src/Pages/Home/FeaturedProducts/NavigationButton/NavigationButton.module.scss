@@ -31,3 +31,11 @@
   .nextButton {
     right: -2rem; /* Adjusted to move outside the product card area */
   } 
+  .disabled {
+    // background-color: var(--gray-500); /* Gray color for disabled state */
+    // cursor: not-allowed; /* Change cursor to indicate disabled state */
+    // pointer-events: none; /* Disable pointer events */
+    // display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; /* Smooth transition for visibility */
+ }
