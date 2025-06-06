@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './FeaturedProducts.module.scss';
-
+import NavigationButton from './NavigationButton/NavigationButton.js';
 const FeaturedProductsData = [
     {
         id: 1,
@@ -77,12 +77,8 @@ function FeaturedProducts() {
                         ))}
                     </div>
                 </div>
-                <button className={`${styles.navigationButton} ${styles.prevButton}`} onClick={handlePrev}>
-                    &lt;
-                </button>
-                <button className={`${styles.navigationButton} ${styles.nextButton}`} onClick={handleNext}>
-                    &gt;
-                </button>
+                <NavigationButton handleNext={handleNext} handlePrev={handlePrev}  type="next"/>
+                <NavigationButton handleNext={handleNext} handlePrev={handlePrev} type="back" />
             </section>
       );
 }

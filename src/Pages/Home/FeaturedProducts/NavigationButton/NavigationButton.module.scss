@@ -1,0 +1,33 @@
+.navigationButton {
+    position: absolute;
+    top: 50%; /* Adjusted position to avoid covering images */
+    transform: translateY(-50%);
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 1rem;
+    font-size: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      background-color: var(--primary-light);
+      transform: translateY(-50%) scale(1.2); /* Scale animation on hover */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect */
+    }
+
+    &:active {
+      transform: translateY(-50%) scale(1); /* Reset scale on click */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+    }
+  }
+
+  .prevButton {
+    left: -2rem; /* Adjusted to move outside the product card area */
+  }
+
+  .nextButton {
+    right: -2rem; /* Adjusted to move outside the product card area */
+  }
