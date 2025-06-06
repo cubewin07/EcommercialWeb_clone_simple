@@ -3,7 +3,6 @@ import styles from './NavigationButton.module.scss';
 
 function NavigationButton({ handleNext, handlePrev, type, disabled }) {
 
-    console.log(disabled);
 
     const className = clsx(styles.navigationButton, {
         [styles.nextButton]: type === 'next',

@@ -39,20 +39,20 @@ const FeaturedProductsData = [
         image: "/assets/images/product6.jpg"
     },
     {
-        id: 6,
-        name: "Product 6",
+        id: 7,
+        name: "Product 7",
         price: "$69.99",
         image: "/assets/images/product6.jpg"
     },
     {
-        id: 6,
-        name: "Product 6",
+        id: 8,
+        name: "Product 8",
         price: "$69.99",
         image: "/assets/images/product6.jpg"
     },
     {
-        id: 6,
-        name: "Product 6",
+        id: 9,
+        name: "Product 9",
         price: "$69.99",
         image: "/assets/images/product6.jpg"
     }
@@ -74,7 +74,6 @@ function FeaturedProducts() {
         }
     };
 
-    console.log(currentIndex >= FeaturedProductsData.length - 3);
 
     return (
         <section className={styles.featuredProducts}>
