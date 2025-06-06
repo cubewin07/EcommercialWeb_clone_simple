@@ -4,6 +4,7 @@
   height: 400px; /* Set a fixed height for the banner */
   overflow: hidden;
   margin-top: 0.5rem; /* Converted 1rem to 1.6rem */
+  border-radius: 0.2rem;
 
   &:hover .ChangeBanner {
     opacity: 1; /* Show buttons on hover */
