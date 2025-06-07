@@ -9,14 +9,14 @@ import styles from './login.module.scss'
 const loginSchema = z.object({
     username: z.string({
         required_error: 'Username is required',
-    }).min(3),
+    }).nonempty({ message: 'Username is required' }).min(3),
     email: z.string({
         required_error: 'Email is required',
-    }).email(),
+    }).nonempty({ message: 'Email is required' }).email(),
     password: z.string({
         required_error: 'Password is required',
         invalid_type_error: 'Password must be a string',
-    }).min(8),
+    }).nonempty({ message: 'Password is required' }).min(8),
 })
 
 const TIMEOUT = 2000
