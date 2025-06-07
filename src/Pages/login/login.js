@@ -25,7 +25,7 @@ function Login() {
     const { 
         register, 
         handleSubmit, 
-        formState: { errors, isValid, isDirty },
+        formState: { errors, isValid, dirtyFields },
         watch,
         trigger
     } = useForm({
@@ -50,11 +50,12 @@ function Login() {
 
     useEffect(() => {
         let timer
+        setShowUsernameError(false)
         if (typingTimeoutUsername) {
             clearTimeout(typingTimeoutUsername)
         }
 
-        if (isDirty) {
+        if (dirtyFields.username) {
             timer = setTimeout(() => {    
                 trigger('username').then(valid => setShowUsernameError(!valid))
             }, TIMEOUT)
@@ -70,12 +71,14 @@ function Login() {
     }, [username])
 
     useEffect(() => {
+        console.log(dirtyFields);
         let timer
+        setShowEmailError(false)
         if (typingTimeoutEmail) {
             clearTimeout(typingTimeoutEmail)
         }
         
-        if (isDirty) {
+        if (dirtyFields.email) {
             timer = setTimeout(() => {
                 trigger('email').then(valid => setShowEmailError(!valid))
             }, TIMEOUT)
@@ -91,11 +94,12 @@ function Login() {
 
     useEffect(() => {
         let timer
+        setShowPasswordError(false)
         if (typingTimeoutPassword) {
             clearTimeout(typingTimeoutPassword)
         }
         
-        if (isDirty) {
+        if (dirtyFields.password) {
             timer = setTimeout(() => {
                 trigger('password').then(valid => setShowPasswordError(!valid))
             }, TIMEOUT)
