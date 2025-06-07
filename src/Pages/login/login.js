@@ -6,9 +6,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import styles from './login.module.scss'
 
 const loginSchema = z.object({
-    username: z.string().min(3),
-    email: z.string().email(),
-    password: z.string().min(8),
+    username: z.string({
+        required_error: 'Username is required',
+    }).min(3),
+    email: z.string({
+        required_error: 'Email is required',
+    }).email(),
+    password: z.string({
+        required_error: 'Password is required',
+        invalid_type_error: 'Password must be a string',
+    }).min(8),
 })
 
 function Login() {

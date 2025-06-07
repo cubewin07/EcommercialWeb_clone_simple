@@ -60,29 +60,35 @@
 }
 
 .loginForm button[type="submit"] {
-  width: 100%;
-  padding: 0.8rem;
-  background: linear-gradient(90deg, #009688 60%, #43e97b 100%);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.18s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: 1rem;
-  box-shadow: 0 2px 8px rgba(67, 233, 123, 0.08);
-
-  &:hover {
-    background: linear-gradient(90deg, #43e97b 60%, #009688 100%);
-    transform: scale(1.04);
-    box-shadow: 0 4px 16px rgba(67, 233, 123, 0.13);
+    width: 100%;
+    padding: 0.8rem;
+    background: linear-gradient(270deg, #009688, #43e97b);
+    background-size: 200% 100%;
+    background-position: left;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      background-position 1s ease,
+      transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 1rem;
+    box-shadow: 0 2px 8px rgba(67, 233, 123, 0.08);
+  
+    &:hover {
+      background-position: right;
+      transform: scale(1.04);
+      box-shadow: 0 4px 16px rgba(67, 233, 123, 0.13);
+    }
+  
+    &:active {
+      transform: scale(0.98);
+      box-shadow: 0 1px 4px rgba(67, 233, 123, 0.08);
+    }
   }
-  &:active {
-    transform: scale(0.98);
-    box-shadow: 0 1px 4px rgba(67, 233, 123, 0.08);
-  }
-}
 
 .loginForm .socialLogin {
   display: flex;
@@ -93,7 +99,7 @@
 
   span {
     color: #888;
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     margin-bottom: 0.2rem;
   }
 }
@@ -107,7 +113,7 @@
   padding: 0.7rem 0;
   border: none;
   border-radius: 6px;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
@@ -116,9 +122,14 @@
   box-shadow: 0 1px 4px rgba(0,0,0,0.07);
 }
 
-.loginForm .googleBtn img, .loginForm .facebookBtn img {
-  width: 22px;
-  height: 22px;
+.loginForm .facebookBtn img {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.loginForm .googleBtn img {
+    width: 5rem;
+    height: 2.2rem;
 }
 
 .loginForm .googleBtn {
@@ -142,7 +153,7 @@
 .loginForm p {
   text-align: center;
   margin-top: 1.2rem;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   color: #666;
 
   a {
@@ -203,7 +214,7 @@
 }
 
 .sidePanel p {
-  font-size: 1.1rem;
+font-size: 1.2rem;
   line-height: 1.5;
 }
 
@@ -248,7 +259,7 @@
     padding: 0.8rem;
     border: 1px solid #ddd;
     border-radius: 6px;
-    font-size: 1rem;
+    font-size: 1.2rem;
     background: rgba(255,255,255,0.8);
     transition: border-color 0.3s, box-shadow 0.3s;
 
@@ -261,10 +272,27 @@
 }
 
 .error {
-  color: #ff4d4f;
-  font-size: 0.9rem;
-  margin-top: 0.5rem;
-}
+    color: #5a1a01; /* deep orange-brown for readability */
+    background: #fff3cd; /* soft yellow background */
+    border: 1px solid #ffeeba;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.1);
+    line-height: 1.4;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .error::before {
+    content: '⚠️';
+    font-size: 1.2rem;
+    transform: translateY(1px);
+  }
 
 button {
 //   width: 100%;
@@ -287,7 +315,7 @@ button {
 p {
   text-align: center;
   margin-top: 1rem;
-  font-size: 0.9rem;
+  font-size: 1.2rem;    
   color: #666;
 
   a {
