@@ -23,8 +23,7 @@ function Header() {
                         <Link to="/cart" className={styles.navLink}>Cart</Link>
                     </li>
                     <li className={styles.loginItem}>
-                        {/* <Link to="/login" className={styles.navLink}>Login</Link> */}
-                        <button className={styles.navLink} onClick={() => navigate('/login', {replace: true})}>Login</button>
+                        <Link to="/login" className={styles.navLink}>Login</Link>
                     </li>
                     {/* <li className={styles.userItem}>
                         <img src="/assets/images/user.png" alt="User" className={styles.userImage} />

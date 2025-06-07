@@ -152,7 +152,7 @@ function Login() {
 
     const onSubmit = (data) => {
         console.log(data)
-        navigate('/')
+        navigate('/', {state: data.username, replace: true})
     }
 
     return (  
