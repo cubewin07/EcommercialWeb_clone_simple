@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -18,11 +19,96 @@ const loginSchema = z.object({
     }).min(8),
 })
 
+const TIMEOUT = 2000
+
 function Login() {
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: zodResolver(loginSchema)
+    const { 
+        register, 
+        handleSubmit, 
+        formState: { errors, isValid },
+        watch,
+        trigger
+    } = useForm({
+        resolver: zodResolver(loginSchema),
+        mode: 'onChange',
+        defaultValues: {
+            username: '',
+            email: '',
+            password: '',
+        }
     })
+    const username = watch('username')
+    const email = watch('email')
+    const password = watch('password')
+    const [typingTimeoutUsername, setTypingTimeoutUsername] = useState(null)
+    const [typingTimeoutEmail, setTypingTimeoutEmail] = useState(null)
+    const [typingTimeoutPassword, setTypingTimeoutPassword] = useState(null)
+    const [showUsernameError, setShowUsernameError] = useState(false)
+    const [showEmailError, setShowEmailError] = useState(false)
+    const [showPasswordError, setShowPasswordError] = useState(false)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        console.log('username', username)
+        let timer
+        if (typingTimeoutUsername) {
+            clearTimeout(typingTimeoutUsername)
+        }
+
+        if (username !== '') {
+            timer = setTimeout(() => {    
+                trigger('username').then(valid => setShowUsernameError(!valid))
+            }, TIMEOUT)
+            setTypingTimeoutUsername(timer)
+        }
+        
+
+        return () => {
+            if (timer) {
+                clearTimeout(timer)
+            }
+        }
+    }, [username])
+
+    useEffect(() => {
+        let timer
+        if (typingTimeoutEmail) {
+            clearTimeout(typingTimeoutEmail)
+        }
+        
+        if (email !== '') {
+            timer = setTimeout(() => {
+                trigger('email').then(valid => setShowEmailError(!valid))
+            }, TIMEOUT)
+            setTypingTimeoutEmail(timer)
+        }
+
+        return () => {
+            if (timer) {
+                clearTimeout(timer)
+            }
+        }
+    }, [email])
+
+    useEffect(() => {
+        let timer
+        if (typingTimeoutPassword) {
+            clearTimeout(typingTimeoutPassword)
+        }
+        
+        if (password !== '') {
+            timer = setTimeout(() => {
+                trigger('password').then(valid => setShowPasswordError(!valid))
+            }, TIMEOUT)
+            setTypingTimeoutPassword(timer)
+        }
+        
+        return () => {
+            if (timer) {
+                clearTimeout(timer)
+            }
+        }
+    }, [password])
 
     const onSubmit = (data) => {
         console.log(data)
@@ -43,17 +129,17 @@ function Login() {
                         <div className={styles.inputGroup}>
                             <label htmlFor="username">Username</label>
                             <input type="username" id="username" {...register('username')} />
-                            {errors.username && <p className={styles.error}>{errors.username.message}</p>}
+                            {showUsernameError && errors.username && <p className={styles.error}>{errors.username.message}</p>}
                         </div>
                         <div className={styles.inputGroup}>
                             <label htmlFor="email">Email</label>
                             <input type="email" id="email" {...register('email')} />
-                            {errors.email && <p className={styles.error}>{errors.email.message}</p>}
+                            {showEmailError && errors.email && <p className={styles.error}>{errors.email.message}</p>}
                         </div>
                         <div className={styles.inputGroup}>
                             <label htmlFor="password">Password</label>
                             <input type="password" id="password" {...register('password')} />
-                            {errors.password && <p className={styles.error}>{errors.password.message}</p>}
+                            {showPasswordError && errors.password && <p className={styles.error}>{errors.password.message}</p>}
                         </div>
                         <button type="submit">Login</button>
                         <div className={styles.socialLogin}>
