@@ -1,6 +1,9 @@
-import {Link } from 'react-router-dom';
+import {Link, useNavigate } from 'react-router-dom';
 import styles from'./Header.module.scss'
 function Header() {
+
+    const navigate = useNavigate();
+
     return ( 
         <header className={styles.header}>
             <div className={styles.logo}>
@@ -19,10 +22,11 @@ function Header() {
                     <li className={styles.navItem}>
                         <Link to="/cart" className={styles.navLink}>Cart</Link>
                     </li>
-                    {/* <li className={styles.loginItem}>
-                        <Link to="/login" className={styles.navLink}>Login</Link>
-                    </li> */}
-                    <li className={styles.userItem}>
+                    <li className={styles.loginItem}>
+                        {/* <Link to="/login" className={styles.navLink}>Login</Link> */}
+                        <button className={styles.navLink} onClick={() => navigate('/login', {replace: true})}>Login</button>
+                    </li>
+                    {/* <li className={styles.userItem}>
                         <img src="/assets/images/user.png" alt="User" className={styles.userImage} />
                         <span className={styles.userName}>John Doe</span>
                         <ul className={styles.userMenu}>
@@ -33,7 +37,7 @@ function Header() {
                                 <Link to="/logout" className={styles.navLink}>Logout</Link>
                             </li>
                         </ul>
-                    </li>
+                    </li> */}
                 </ul>    
             </nav>    
         </header>

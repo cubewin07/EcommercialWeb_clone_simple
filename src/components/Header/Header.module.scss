@@ -62,6 +62,23 @@
         transform: scale(1.03);
       }
     }
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-top: 0.1rem;
+      font-size: inherit; /* Inherit font size from parent */
+      color: inherit; /* Inherit color from parent */
+      transition: color 0.3s, background-color 0.3s, transform 0.2s;
+
+      &:hover {
+        background-color: var(--hover-highlight);
+        color: var(--accent);
+        transform: scale(1.03);
+      }
+    }
+
   }
 
   .loginItem {
