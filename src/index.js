@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 
 import GlobalStyles from './GlobalStyles/GlobalStyles.js';
 import ThemeProviderR from './contexts/ThemeProvider.js';
+import AuthenProvider from './contexts/AuthenProvider.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <GlobalStyles>
-      <ThemeProviderR>
-        <App />
-      </ThemeProviderR>
+      <AuthenProvider>
+        <ThemeProviderR>
+          <App />
+        </ThemeProviderR>
+      </AuthenProvider>
     </GlobalStyles>
   </React.StrictMode>
 );

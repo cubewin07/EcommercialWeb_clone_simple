@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import {TextField, Button, styled} from '@mui/material'
 
 import styles from './login.module.scss'
+import { AuthenContext } from '../../contexts/AuthenProvider'
 
 const loginSchema = z.object({
     username: z.string({
@@ -28,6 +29,7 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
 
   '& .MuiOutlinedInput-root': {
     backgroundColor: theme.palette.mode === 'dark' ? '#2e2e2e' : '#fcf8e3',
+    minHeight: '60px',
     '& fieldset': {
       borderColor: theme.palette.mode === 'dark' ? '#666' : '#e1dcb8',
     },
@@ -40,8 +42,9 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
   },
 
   '& input': {
-    padding: '1.6rem 1.2rem 1.8rem 1.2rem',
     color: theme.palette.text.primary,
+    padding: '1.4rem 1.2rem 1.6rem 1.2rem',
+    fontSize: '1.4rem',
   },
 
   '& label.MuiInputLabel-root': {
@@ -55,11 +58,22 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#2e2e2e' : '#fcf8e3',
     padding: '0 4px',
   },
+
+  '& .MuiFormHelperText-root': {
+  backgroundColor: theme.palette.mode === 'dark' ? '#2e2e2e' : '#fff', // fully white/light background
+  fontSize: '1.1rem',
+  color: theme.palette.error.main,
+  padding: '4px 8px',
+  margin: '4px 0 0 0',
+  borderRadius: 6,
+  display: 'inline-block',
+}
 }));
 
 const TIMEOUT = 2000
 
 function Login() {
+    const {userList} = useContext(AuthenContext)
     const { 
         register, 
         handleSubmit, 
@@ -171,7 +185,12 @@ function Login() {
                             variant="outlined"
                             fullWidth
                             margin='normal'
-                            {...register('username')}
+                            {...register('username', {
+                                validate: (value) => {
+                                    const user = Object.values(userList).find(user => user.username === value);
+                                    return user ? true : 'Username does not exist';
+                                }
+                            })}
                             error={showUsernameError && !!errors.username}
                             helperText={showUsernameError && errors.username ? errors.username.message : ''}
                         />
@@ -180,7 +199,12 @@ function Login() {
                             variant="outlined"
                             fullWidth
                             margin='normal'
-                            {...register('email')}
+                            {...register('email',  {
+                                validate: (value) => {
+                                    const user = Object.values(userList).find(user => user.email === value);
+                                    return user ? true : 'Email does not exist';
+                                }
+                            })}
                             error={showEmailError && !!errors.email}
                             helperText={showEmailError && errors.email ? errors.email.message : ''}
                         />
@@ -190,7 +214,12 @@ function Login() {
                             variant="outlined"
                             fullWidth
                             margin='normal'
-                            {...register('password')}
+                            {...register('password', {
+                                validate: (value) => {
+                                    const user = Object.values(userList).find(user => user.password === value);
+                                    return user ? true : 'Incorrect password';
+                                }
+                            })}
                             error={showPasswordError && !!errors.password}
                             helperText={showPasswordError && errors.password ? errors.password.message : ''}
                         />

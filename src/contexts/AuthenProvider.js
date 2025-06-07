@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect } from "react";
 
-const AuthenContext = createContext();
+export const AuthenContext = createContext();
 
 function AuthenProvider({ children }) {
-    
+
     const [name, setName] = useState(() => {
         const storedName = localStorage.getItem('name');
         return storedName ? JSON.parse(storedName) : null;
