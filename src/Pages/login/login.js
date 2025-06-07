@@ -71,7 +71,6 @@ function Login() {
     }, [username])
 
     useEffect(() => {
-        console.log(dirtyFields);
         let timer
         setShowEmailError(false)
         if (typingTimeoutEmail) {

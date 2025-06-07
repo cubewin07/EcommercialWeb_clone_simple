@@ -19,8 +19,20 @@ function Header() {
                     <li className={styles.navItem}>
                         <Link to="/cart" className={styles.navLink}>Cart</Link>
                     </li>
-                    <li className={styles.loginItem}>
+                    {/* <li className={styles.loginItem}>
                         <Link to="/login" className={styles.navLink}>Login</Link>
+                    </li> */}
+                    <li className={styles.userItem}>
+                        <img src="/assets/images/user.png" alt="User" className={styles.userImage} />
+                        <span className={styles.userName}>John Doe</span>
+                        <ul className={styles.userMenu}>
+                            <li className={styles.userMenuItem}>
+                                <Link to="/dashboard" className={styles.navLink}>Dashboard</Link>
+                            </li>
+                            <li className={styles.userMenuItem}>
+                                <Link to="/logout" className={styles.navLink}>Logout</Link>
+                            </li>
+                        </ul>
                     </li>
                 </ul>    
             </nav>    
