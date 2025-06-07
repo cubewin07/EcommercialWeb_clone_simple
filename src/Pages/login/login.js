@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from 'react-router-dom'
+import {TextField, Button, styled} from '@mui/material'
 
 import styles from './login.module.scss'
 
@@ -18,6 +19,43 @@ const loginSchema = z.object({
         invalid_type_error: 'Password must be a string',
     }).nonempty({ message: 'Password is required' }).min(8),
 })
+
+
+const CustomTextField = styled(TextField)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#2e2e2e' : '#fcf8e3',
+  borderRadius: 8,
+  color: theme.palette.text.primary,
+
+  '& .MuiOutlinedInput-root': {
+    backgroundColor: theme.palette.mode === 'dark' ? '#2e2e2e' : '#fcf8e3',
+    '& fieldset': {
+      borderColor: theme.palette.mode === 'dark' ? '#666' : '#e1dcb8',
+    },
+    '&:hover fieldset': {
+      borderColor: theme.palette.mode === 'dark' ? '#f0a202' : '#f4ca58',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#f0a202',
+    },
+  },
+
+  '& input': {
+    padding: '1.6rem 1.2rem 1.8rem 1.2rem',
+    color: theme.palette.text.primary,
+  },
+
+  '& label.MuiInputLabel-root': {
+    fontSize: '1.4rem',
+    color: theme.palette.text.primary,
+  },
+
+  '& label.Mui-focused': {
+    fontSize: '1.2rem',
+    transform: 'translate(14px, -9px) scale(1)',
+    backgroundColor: theme.palette.mode === 'dark' ? '#2e2e2e' : '#fcf8e3',
+    padding: '0 4px',
+  },
+}));
 
 const TIMEOUT = 2000
 
@@ -128,22 +166,45 @@ function Login() {
                 <div className={styles.formPanel}>
                     <form onSubmit={handleSubmit(onSubmit)} className={styles.loginForm}>
                         <h2>Login</h2>
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="username">Username</label>
-                            <input type="username" id="username" {...register('username')} />
-                            {showUsernameError && errors.username && <p className={styles.error}>{errors.username.message}</p>}
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="email">Email</label>
-                            <input type="email" id="email" {...register('email')} />
-                            {showEmailError && errors.email && <p className={styles.error}>{errors.email.message}</p>}
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label htmlFor="password">Password</label>
-                            <input type="password" id="password" {...register('password')} />
-                            {showPasswordError && errors.password && <p className={styles.error}>{errors.password.message}</p>}
-                        </div>
-                        <button type="submit">Login</button>
+                        <CustomTextField
+                            label="Username"
+                            variant="outlined"
+                            fullWidth
+                            margin='normal'
+                            {...register('username')}
+                            error={showUsernameError && !!errors.username}
+                            helperText={showUsernameError && errors.username ? errors.username.message : ''}
+                        />
+                        <CustomTextField
+                            label="Email"   
+                            variant="outlined"
+                            fullWidth
+                            margin='normal'
+                            {...register('email')}
+                            error={showEmailError && !!errors.email}
+                            helperText={showEmailError && errors.email ? errors.email.message : ''}
+                        />
+                        <CustomTextField
+                            label="Password"
+                            type="password"
+                            variant="outlined"
+                            fullWidth
+                            margin='normal'
+                            {...register('password')}
+                            error={showPasswordError && !!errors.password}
+                            helperText={showPasswordError && errors.password ? errors.password.message : ''}
+                        />
+
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            // disabled={!isValid}
+                            className={styles.submitButton}
+                        >
+                            Login
+                        </Button>
                         <div className={styles.socialLogin}>
                             <span>or login with</span>
                             <button type="button" className={styles.googleBtn}>
