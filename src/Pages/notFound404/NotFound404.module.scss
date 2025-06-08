@@ -1,0 +1,177 @@
+.errorPage {
+  background-color: #0d0d0d;
+  color: #fff;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Courier New', monospace;
+  position: relative;
+}
+
+.backgroundParticles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #f0a202;
+  opacity: 0.6;
+  border-radius: 50%;
+  animation: floatParticle 10s linear infinite;
+  top: 100%;
+  left: calc(100% * var(--i));
+}
+
+.particle:nth-child(odd) {
+  background: #0ff;
+}
+
+.particle:nth-child(even) {
+  background: #f0f;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-50vh) scale(1.2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.glitchText {
+  font-size: 8rem;
+  color: #f0f;
+  position: relative;
+  animation: glitch 1s infinite;
+  z-index: 1;
+}
+
+.glitchText::before,
+.glitchText::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  color: #0ff;
+  clip: rect(0, 0, 0, 0);
+  animation: glitch 2s infinite;
+}
+
+.glitchText::before {
+  animation-delay: 0.2s;
+  color: #f0f;
+}
+
+.glitchText::after {
+  animation-delay: 0.4s;
+  color: #0ff;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-5px, 5px); }
+  40% { transform: translate(5px, -5px); }
+  60% { transform: translate(-5px, 0); }
+  80% { transform: translate(5px, 5px); }
+  100% { transform: translate(0); }
+}
+
+.robot {
+  margin-top: 2rem;
+  animation: float 2s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.head {
+  background-color: #222;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border-radius: 12px;
+  position: relative;
+}
+
+.eyes {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px 10px;
+}
+
+.eye {
+  width: 20px;
+  height: 20px;
+  background-color: #0ff;
+  border-radius: 50%;
+  animation: blink 3s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.1); }
+}
+
+.body {
+  margin-top: 1rem;
+  color: #ccc;
+}
+
+.bar {
+  width: 120px;
+  height: 10px;
+  background-color: #555;
+  margin: 0 auto;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress {
+  width: 99%;
+  height: 100%;
+  background-color: #f0a202;
+  animation: loading-stuck 2s ease-in-out infinite;
+}
+
+@keyframes loading-stuck {
+  0%, 100% { width: 98%; }
+  50% { width: 99%; }
+}
+
+.homeButton {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background-color: #f0a202;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #000;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.homeButton:hover {
+  transform: scale(1.1);
+  background-color: #ffa600;
+}
