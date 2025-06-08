@@ -21,11 +21,11 @@
 
 .particle {
   position: absolute;
-  width: 4px;
-  height: 4px;
+  width: .8rem;
+  height: 1.6rem;
   background: #f0a202;
   opacity: 0.6;
-  border-radius: 50%;
+  border-radius: .4rem;
   animation: floatParticle 10s linear infinite;
   top: 100%;
   left: calc(100% * var(--i));
