@@ -78,6 +78,52 @@ const shoppingReducer = (state, action) => {
             }
             // If item not found, return the current state
             return state;
+        case 'DECREASE_ITEM_QUANTITY':
+            const decreaseItemId = action.payload;
+            const decreaseItemIndex = state.cart.findIndex(cartItem => cartItem.id === decreaseItemId);
+            if (decreaseItemIndex !== -1) {
+                const updatedCart = [...state.cart];
+                const updatedItem = { ...updatedCart[decreaseItemIndex] };
+                if (updatedItem.quantity > 1) {
+                    updatedItem.quantity -= 1; // Decrease quantity by 1
+                    updatedCart[decreaseItemIndex] = updatedItem;
+                    return {
+                        ...state,
+                        cart: updatedCart,
+                        totalPrice: state.totalPrice - updatedItem.price, // Subtract price of the item
+                        totalItems: state.totalItems - 1, // Decrease total items by 1
+                    };
+                } else {
+                    // If quantity is 1, remove the item from the cart
+                    const newCart = state.cart.filter(cartItem => cartItem.id !== decreaseItemId);
+                    return {
+                        ...state,
+                        cart: newCart,
+                        totalPrice: state.totalPrice - updatedItem.price, // Subtract price of the item
+                        totalItems: state.totalItems - 1, // Decrease total items by 1
+                    };
+                }
+            }
+            // If item not found, return the current state
+            return state;
+        case 'UPDATE_ITEM_QUANTITY':
+            const { itemId: updateItemId, quantity } = action.payload;
+            const updateItemIndex = state.cart.findIndex(cartItem => cartItem.id === updateItemId);
+            if (updateItemIndex !== -1) {
+                const updatedCart = [...state.cart];
+                const updatedItem = { ...updatedCart[updateItemIndex] };
+                const quantityDifference = quantity - updatedItem.quantity;
+                updatedItem.quantity = quantity; // Update to the new quantity
+                updatedCart[updateItemIndex] = updatedItem;
+                return {
+                    ...state,
+                    cart: updatedCart,
+                    totalPrice: state.totalPrice + (updatedItem.price * quantityDifference), // Adjust total price
+                    totalItems: state.totalItems + quantityDifference, // Adjust total items
+                };
+            }
+            // If item not found, return the current state
+            return state;
         default:
             return state;
     }
@@ -100,6 +146,14 @@ function ShoppingProvider({ children }) {
         dispatch({ type: 'INCREASE_ITEM_QUANTITY', payload: itemId });
     };
 
+    const decreaseItemQuantity = (itemId) => {
+        dispatch({ type: 'DECREASE_ITEM_QUANTITY', payload: itemId });
+    };
+
+    const updateQuantity = (itemId, quantity) => {
+        dispatch({ type: 'UPDATE_ITEM_QUANTITY', payload: { itemId, quantity } });
+    };
+
     const value = {
         cart: state.cart,
         totalPrice: state.totalPrice,
@@ -107,6 +161,8 @@ function ShoppingProvider({ children }) {
         addToCart,
         removeFromCart,
         clearCart,
+        increaseItemQuantity,
+        decreaseItemQuantity,
     };
     return (  
         <ShoppingContext.Provider value={value}>

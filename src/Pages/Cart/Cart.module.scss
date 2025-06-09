@@ -102,6 +102,39 @@
         background-color: #e63946;
       }
     }
+
+    .quantityControl {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    
+      span {
+        font-size: 1.6rem;
+        font-weight: 500;
+        min-width: 2rem;
+        text-align: center;
+        margin-top: .5rem;
+      }
+      .qtyBtn {
+        background-color: #009688;
+        border: none;
+        font-size: 1.6rem;
+        font-weight: bold;
+        padding: 0.3rem 0.8rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+      
+        &:hover {
+          background-color: #00796b;
+        }
+      }
+    }
+
+    &.removing {
+      animation: fadeOut 0.3s ease-in-out forwards;
+    }
   }
 
   .cartTotal {
@@ -121,4 +154,14 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(1rem); }
   to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
 }
