@@ -173,7 +173,7 @@
 
 .userMenuItem {
   width: 100%;
-  padding: 0.7rem 1.5rem 0.7rem 1rem;
+  padding: 0 1.5rem 0.7rem 1rem;
   color: #222;
   font-size: 1.25rem;
   background: none;
@@ -267,6 +267,30 @@
   &:hover .tooltip {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.userButton {
+  width: 100%;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    background-color: var(--primary-light);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 }
 

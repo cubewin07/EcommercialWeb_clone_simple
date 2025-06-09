@@ -11,8 +11,8 @@ function Header() {
     const navigate = useNavigate();
     const location = useLocation();
     const state = location.state
-    const user = name || (state && state.user) || 'Guest';
-    console.log(totalItems, isAuthenticated);
+    const user = name || (state && state.user);
+    console.log(state, isAuthenticated);
     return ( 
         <header className={styles.header}>
             <div className={styles.logo}>
@@ -58,16 +58,29 @@ function Header() {
                     </div>
                     </li>
                     {
-                        isAuthenticated ? (
+                        isAuthenticated || user ? (
                             <li className={styles.userItem}>
                                 <img src="/assets/images/user.png" alt="User" className={styles.userImage} />
                                 <span className={styles.userName}>{user}</span>
                                 <ul className={styles.userMenu}>
                                     <li className={styles.userMenuItem}>
-                                        <Link to="/dashboard" className={styles.navLink}>Dashboard</Link>
+                                        <button 
+                                            className={styles.userButton} 
+                                            onClick={() => navigate('/dashboard')}
+                                        >
+                                            Dashboard
+                                        </button>
                                     </li>
                                     <li className={styles.userMenuItem}>
-                                        <Link to="/logout" className={styles.navLink}>Logout</Link>
+                                        <button 
+                                            className={styles.userButton} 
+                                            onClick={() => {
+                                                logout();
+                                                navigate('/');
+                                            }}
+                                        >
+                                            Logout  
+                                        </button>
                                     </li>
                                 </ul>
                             </li>
