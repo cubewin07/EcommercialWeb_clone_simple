@@ -8,12 +8,11 @@ function Cart() {
     const { cart, totalItems, totalPrice,removeFromCart, increaseItemQuantity, decreaseItemQuantity, updateQuantity } = useContext(ShoppingContext);
 
     const handleRemoveItem = (id) => {
-        if(cart.length === 1) {
+        if (cart.length === 1) {
             removeFromCart(id);
             return;
         }
         setTimeout(() => {
-            console.log(`Removing item with id: ${id}`);
             removeFromCart(id);
         }, 500); // Match animation duration
     };

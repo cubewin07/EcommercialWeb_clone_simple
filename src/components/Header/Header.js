@@ -12,6 +12,7 @@ function Header() {
     const location = useLocation();
     const state = location.state;
     const user = name || (state && state.user);
+
     const [showErrorModal, setShowErrorModal] = useState(false);
 
     const handleCartClick = () => {
