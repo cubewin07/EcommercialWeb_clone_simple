@@ -17,8 +17,9 @@ const shoppingReducer = (state, action) => {
             if (existingItemIndex !== -1) {
                 // If item already exists in cart, update its quantity
                 const updatedCart = [...state.cart];
-                updatedCart[existingItemIndex].quantity += item.quantity;
-                console.log(updatedCart[existingItemIndex].quantity, item.quantity);
+                const updatedItem = {...updatedCart[existingItemIndex]};
+                updatedItem.quantity = updatedItem.quantity + item.quantity
+                updatedCart[existingItemIndex] = updatedItem;
                 return {
                     ...state,
                     cart: updatedCart,
