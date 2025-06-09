@@ -7,12 +7,12 @@ import { ShoppingContext } from '../../contexts/ShoppingProvider';
 import styles from'./Header.module.scss'
 function Header() {
     const { name, logout, isAuthenticated } = useContext(AuthenContext);
-    const { cartItems } = useContext(ShoppingContext);
+    const { totalItems } = useContext(ShoppingContext);
     const navigate = useNavigate();
     const location = useLocation();
     const state = location.state
     const user = name || (state && state.user) || 'Guest';
-    console.log(user, isAuthenticated);
+    console.log(totalItems, isAuthenticated);
     return ( 
         <header className={styles.header}>
             <div className={styles.logo}>
@@ -44,20 +44,18 @@ function Header() {
                             <circle cx="20" cy="21" r="1" />
                             <path d="M1 1h4l2.2 13.3a1 1 0 0 0 1 .7h9.4a1 1 0 0 0 1-.8L23 6H6" />
                         </svg>
-                        {cartItems && cartItems.length > 0 && (
-                            <motion.span
-                                key={cartItems.length}
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                exit={{ scale: 0 }}
-                                className={styles.cartCount}
+                        {totalItems > 0 && isAuthenticated && (
+                            <motion.span 
+                                className={styles.cartCount} 
+                                initial={{ opacity: 0, scale: 0.5 }} 
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.3 }}
                             >
-                            {cartItems.length}
-                          </motion.span>
+                                {totalItems}
+                            </motion.span>
                         )}
                         <span className={styles.tooltip}>View cart</span>
                     </div>
-                        {/* <Link to="/cart" className={styles.navLink}>Cart</Link> */}
                     </li>
                     {
                         isAuthenticated ? (
