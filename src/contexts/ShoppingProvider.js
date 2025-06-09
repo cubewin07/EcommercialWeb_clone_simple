@@ -61,6 +61,23 @@ const shoppingReducer = (state, action) => {
                 totalPrice: 0,
                 totalItems: 0,
             };
+        case 'INCREASE_ITEM_QUANTITY':
+            const increaseItemId = action.payload;
+            const increaseItemIndex = state.cart.findIndex(cartItem => cartItem.id === increaseItemId);
+            if (increaseItemIndex !== -1) {
+                const updatedCart = [...state.cart];
+                const updatedItem = { ...updatedCart[increaseItemIndex] };
+                updatedItem.quantity += 1; // Increase quantity by 1
+                updatedCart[increaseItemIndex] = updatedItem;
+                return {    
+                    ...state,
+                    cart: updatedCart,
+                    totalPrice: state.totalPrice + updatedItem.price, // Add price of the item
+                    totalItems: state.totalItems + 1, // Increase total items by 1
+                };
+            }
+            // If item not found, return the current state
+            return state;
         default:
             return state;
     }
@@ -77,6 +94,10 @@ function ShoppingProvider({ children }) {
     };
     const clearCart = () => {
         dispatch({ type: 'CLEAR_CART' });
+    };
+
+    const increaseItemQuantity = (itemId) => {
+        dispatch({ type: 'INCREASE_ITEM_QUANTITY', payload: itemId });
     };
 
     const value = {
