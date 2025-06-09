@@ -1,5 +1,6 @@
 import {Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
+import { motion } from 'framer-motion';
 
 import { AuthenContext } from '../../contexts/AuthenProvider';
 import { ShoppingContext } from '../../contexts/ShoppingProvider';
@@ -41,7 +42,15 @@ function Header() {
                             <path d="M1 1h4l2.2 13.3a1 1 0 0 0 1 .7h9.4a1 1 0 0 0 1-.8L23 6H6" />
                         </svg>
                         {cartItems && cartItems.length > 0 && (
-                            <span className={styles.cartCount}>{cartItems.length}</span>
+                            <motion.span
+                                key={cartItems.length}
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                exit={{ scale: 0 }}
+                                className={styles.cartCount}
+                            >
+                            {cartItems.length}
+                          </motion.span>
                         )}
                         <span className={styles.tooltip}>View cart</span>
                     </div>
