@@ -38,7 +38,6 @@
   ul {
     display: flex;
     list-style: none;
-    margin-right: -1.5rem;
     padding: 0;
   }
 
@@ -147,7 +146,7 @@
   pointer-events: none;
   position: absolute;
   top: 110%;  
-  right: 2.8rem;
+  right: -0.1rem;
   min-width: 10rem;
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
