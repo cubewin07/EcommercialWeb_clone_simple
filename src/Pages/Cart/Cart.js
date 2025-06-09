@@ -6,23 +6,23 @@ import { ShoppingContext } from '../../contexts/ShoppingProvider';
 
 function Cart() {
     const { cart, totalItems, totalPrice,removeFromCart, increaseItemQuantity, decreaseItemQuantity, updateQuantity } = useContext(ShoppingContext);
-    const [removingItemId, setRemovingItemId] = useState(null);
 
     const handleRemoveItem = (id) => {
-        setRemovingItemId(id);
-        setTimeout(() => {
+        if(cart.length === 1) {
             removeFromCart(id);
-            setRemovingItemId(null);
-        }, 300); // Match animation duration
+            return;
+        }
+        setTimeout(() => {
+            console.log(`Removing item with id: ${id}`);
+            removeFromCart(id);
+        }, 500); // Match animation duration
     };
 
     const handleQuantityChange = (id, quantity) => {
         if (quantity === 0) {
-            setRemovingItemId(id);
             setTimeout(() => {
                 removeFromCart(id);
-                setRemovingItemId(null);
-            }, 300); // Match animation duration
+            }, 500); // Match animation duration
         } else {
             updateQuantity(id, quantity);
         }
@@ -40,8 +40,12 @@ function Cart() {
                                 className={styles.cartItem}
                                 initial={{ opacity: 1, scale: 1 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.3 }}
+                                exit={{
+                                opacity: 0,
+                                rotateY: -360,
+                                scale: 0.6,
+                                transition: { duration: 0.5, ease: 'easeInOut' }
+                                }}
                             >
                                 <img src={item.image} alt={item.name} className={styles.itemImage} />
                                 <div className={styles.itemDetails}>

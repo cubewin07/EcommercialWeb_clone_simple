@@ -22,6 +22,8 @@
     gap: 2rem;
     width: 100%;
     max-width: 84rem;
+    perspective: 100rem;
+
   }
 
   .cartItem {
@@ -33,6 +35,9 @@
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+
 
     &:hover {
       transform: translateY(-0.2rem);
@@ -132,10 +137,22 @@
       }
     }
 
-    &.removing {
-      animation: fadeOut 0.3s ease-in-out forwards;
-    }
+  //   @keyframes animatedRemove {
+  //     0% {
+  //       opacity: 1;
+  //       transform: scale(1) rotate(0deg) translateY(0);
+  //     }
+  //     100% {
+  //       opacity: 0;
+  //       transform: scale(0.6) rotate(-360deg) translateY(30px);
+  //     }
+  //   }
+
+  //  &.removing {
+  //   animation: animatedRemove 0.5s ease-in-out forwards;
+  // }
   }
+
 
   .cartTotal {
     margin-top: 3rem;

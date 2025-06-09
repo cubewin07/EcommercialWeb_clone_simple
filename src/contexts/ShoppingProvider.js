@@ -163,6 +163,7 @@ function ShoppingProvider({ children }) {
         clearCart,
         increaseItemQuantity,
         decreaseItemQuantity,
+        updateQuantity,
     };
     return (  
         <ShoppingContext.Provider value={value}>
