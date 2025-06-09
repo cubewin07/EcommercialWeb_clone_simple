@@ -36,12 +36,19 @@ function AuthenProvider({ children }) {
         localStorage.removeItem('name');
     }
 
+    const login = (username) => {
+        setName(username);
+        setIsAuthenticated(true);
+        localStorage.setItem('name', JSON.stringify(username));
+    }
+
     const value = {
         name,
         userList,
         registerUser,
         isAuthenticated,
         setIsAuthenticated,
+        login,
         logout
     };
 
