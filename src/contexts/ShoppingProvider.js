@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react';j
+import { createContext, useReducer } from 'react';
 
 export const ShoppingContext = createContext();
 

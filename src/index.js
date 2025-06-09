@@ -7,14 +7,17 @@ import reportWebVitals from './reportWebVitals';
 import GlobalStyles from './GlobalStyles/GlobalStyles.js';
 import ThemeProviderR from './contexts/ThemeProvider.js';
 import AuthenProvider from './contexts/AuthenProvider.js';
+import ShoppingProvider from './contexts/ShoppingProvider.js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <GlobalStyles>
       <AuthenProvider>
-        <ThemeProviderR>
-          <App />
-        </ThemeProviderR>
+        <ShoppingProvider>
+          <ThemeProviderR>
+            <App />
+          </ThemeProviderR>
+        </ShoppingProvider>
       </AuthenProvider>
     </GlobalStyles>
   </React.StrictMode>
