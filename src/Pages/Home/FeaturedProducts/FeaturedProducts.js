@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styles from './FeaturedProducts.module.scss';
 import NavigationButton from './NavigationButton/NavigationButton.js';
+import { ShoppingContext } from '../../../contexts/ShoppingProvider.js';
+import { AuthenContext } from '../../../contexts/AuthenProvider.js';
 const FeaturedProductsData = [
     {
         id: 1,
@@ -61,6 +63,8 @@ const FeaturedProductsData = [
 function FeaturedProducts() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const productsPerPage = 3;
+    const { addToCart } = useContext(ShoppingContext);
+    const { isAuthenticated } = useContext(AuthenContext);
 
     const handleNext = () => {
         if (currentIndex + productsPerPage < FeaturedProductsData.length) {
@@ -73,6 +77,21 @@ function FeaturedProducts() {
             setCurrentIndex(currentIndex - productsPerPage);
         }
     };
+
+    const handleAdding = (product) => {
+        if (isAuthenticated) {
+            addToCart({
+                id: product.id,
+                name: product.name,
+                price: parseFloat(product.price.replace('$', '')),
+                image: product.image,
+                quantity: 1
+            });
+        } else {
+            alert('Please log in to add items to your cart.');
+        }
+    };
+
 
 
     return (
@@ -97,7 +116,7 @@ function FeaturedProducts() {
                             </div>
                             <h3 className={styles.productName}>{product.name}</h3>
                             <p className={styles.productPrice}>{product.price}</p>
-                            <button className={styles.addToCartButton}>Add to Cart</button>
+                            <button className={styles.addToCartButton} onClick={() => handleAdding(product)} >Add to Cart</button>
                         </div>
                     ))}
                 </div>
