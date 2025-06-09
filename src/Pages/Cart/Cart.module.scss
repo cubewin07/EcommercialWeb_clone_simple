@@ -21,7 +21,7 @@
     flex-direction: column;
     gap: 2rem;
     width: 100%;
-    max-width: 840px;
+    max-width: 84rem;
   }
 
   .cartItem {
@@ -35,25 +35,24 @@
     transition: all 0.3s ease;
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      transform: translateY(-0.2rem);
+      box-shadow: 0 1.2rem 2.8rem rgba(0, 0, 0, 0.12);
     }
 
     .itemImage {
-      width: 90px;
-      height: 90px;
-      border-radius: 10px;
+      width: 16rem;
+      height: 9rem;
+      border-radius: 1rem;
       object-fit: cover;
     }
 
     .itemDetails {
       flex: 1;
       padding-left: 2rem;
-
+  
       .itemName {
         font-size: 1.8rem;
         font-weight: 600;
-        margin-bottom: 0.4rem;
         color: #333;
       }
 
@@ -62,20 +61,38 @@
         color: #009688;
         font-weight: 500;
       }
-
+  
       .itemQuantity {
-        font-size: 1.3rem;
-        color: #555;
+        font-size: 1.4rem;
+        color: #444;
         margin-top: 0.3rem;
       }
     }
 
+    .priceColumn {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+      margin-right: 2rem;
+  
+      .unitPrice {
+        font-size: 1.4rem;
+        color: #777;
+      }
+  
+      .totalPerItem {
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #009688;
+      }
+    }  
     .removeBtn {
       background-color: #ff6b6b;
       color: #fff;
       border: none;
       padding: 0.7rem 1.2rem;
-      border-radius: 8px;
+      border-radius: .8rem;
       font-size: 1.2rem;
       font-weight: 600;
       cursor: pointer;
@@ -89,19 +106,19 @@
 
   .cartTotal {
     margin-top: 3rem;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: bold;
     color: var(--primary);
     text-align: center;
-
+  
     span {
       color: #009688;
+      font-size: 2.4rem;
       font-weight: 700;
     }
   }
 }
-
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(1rem); }
   to { opacity: 1; transform: translateY(0); }
 }
