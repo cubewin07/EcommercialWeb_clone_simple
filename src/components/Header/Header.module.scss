@@ -43,7 +43,7 @@
 
   .navItem,
   .loginItem {
-    margin: 0 1.6rem; /* Converted 1rem to 1.6rem */
+    margin: 0 1rem; /* Converted 1rem to 1.6rem */
 
     .navLink {
       display: inline-block;
@@ -219,6 +219,7 @@
   border-radius: 50%;
   transition: transform 0.25s ease;
   background: transparent;
+  margin-right: 1.2rem;
 
   &:hover {
     transform: scale(1.1);
