@@ -1,4 +1,4 @@
-import {Link, useNavigate } from 'react-router-dom';
+import {Link, useNavigate, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import { motion } from 'framer-motion';
 
@@ -9,7 +9,10 @@ function Header() {
     const { name, logout, isAuthenticated } = useContext(AuthenContext);
     const { cartItems } = useContext(ShoppingContext);
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const state = location.state
+    const user = name || (state && state.user) || 'Guest';
+    console.log(user, isAuthenticated);
     return ( 
         <header className={styles.header}>
             <div className={styles.logo}>
@@ -60,7 +63,7 @@ function Header() {
                         isAuthenticated ? (
                             <li className={styles.userItem}>
                                 <img src="/assets/images/user.png" alt="User" className={styles.userImage} />
-                                <span className={styles.userName}>John Doe</span>
+                                <span className={styles.userName}>{user}</span>
                                 <ul className={styles.userMenu}>
                                     <li className={styles.userMenuItem}>
                                         <Link to="/dashboard" className={styles.navLink}>Dashboard</Link>

@@ -72,7 +72,7 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
 const TIMEOUT = 2000
 
 function Login() {
-    const {userList} = useContext(AuthenContext)
+    const {userList, setIsAuthenticated} = useContext(AuthenContext)
     const { 
         register, 
         handleSubmit, 
@@ -165,7 +165,8 @@ function Login() {
 
     const onSubmit = (data) => {
         console.log(data)
-        navigate('/', {state: data.username, replace: true})
+        setIsAuthenticated(true)
+        navigate('/', {state:{user: data.username}, replace: true})
     }
 
     return (  

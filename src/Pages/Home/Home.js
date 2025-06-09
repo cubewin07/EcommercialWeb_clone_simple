@@ -1,3 +1,4 @@
+
 import styles from './Home.module.scss';
 import Banner from './Banner/Banner.js'
 import FeaturedProducts from './FeaturedProducts/FeaturedProducts.js';  
