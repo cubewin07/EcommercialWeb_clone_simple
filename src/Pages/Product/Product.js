@@ -19,10 +19,13 @@ function Product() {
                     return (
                         <ToolTipWrapper 
                             key={product.id}
-                            tooltipText={<ProductTooltipCard 
-                            rating={product.rating} reviews={product.reviews} 
-                            quantity={quantity} 
-                        />}>
+                            tooltipText={
+                                <ProductTooltipCard 
+                                    rating={product.rating} 
+                                    reviews={product.reviews} 
+                                    quantity={quantity} 
+                                />} 
+                        >
                             <ProductCom
                                 key={product.id}
                                 id={product.id}
