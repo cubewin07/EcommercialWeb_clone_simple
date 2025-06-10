@@ -40,6 +40,12 @@ function ProductDetail() {
       <div className={styles.productInfo}>
         <h1 className={styles.productTitle}>{product.name}</h1>
         <p className={styles.productPrice}>${product.price.toFixed(2)}</p>
+        <div className={styles.productRating}>
+          <span className={styles.stars}>
+            {'★'.repeat(Math.floor(product.rating))}{'☆'.repeat(5 - Math.floor(product.rating))}
+          </span>
+          <span className={styles.ratingText}>{product.rating.toFixed(1)} ({product.reviews} reviews)</span>
+        </div>
         <p className={styles.productDescription}>{product.description}</p>
 
         <div className={styles.quantityControl}>
