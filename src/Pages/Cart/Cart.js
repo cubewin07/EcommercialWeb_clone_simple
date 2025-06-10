@@ -46,6 +46,7 @@ function Cart() {
                                 scale: 0.6,
                                 transition: { duration: 0.5, ease: 'easeInOut' }
                                 }}
+                                onClick={() => Navigate(`/product/${item.id}`)}
                             >
                                 <img src={item.image} alt={item.name} className={styles.itemImage} />
                                 <div className={styles.itemDetails}>
