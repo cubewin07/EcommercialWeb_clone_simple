@@ -4,6 +4,7 @@ import Layout from "../Layout/Layout.js";
 import Home from "../Pages/Home/Home.js";
 import Login from "../Pages/login/login.js";
 import Cart from "../Pages/Cart/Cart.js";
+import Product from "../Pages/Product/Product.js";
 import NotFound404 from "../Pages/notFound404/NotFound404.js";
 
 export const routes = createBrowserRouter([
@@ -12,6 +13,7 @@ export const routes = createBrowserRouter([
         element: <Layout />,
         children: [
             { index: true, element: <Home /> },
+            { path: "/product", element: <Product /> },
             { path: "/login", element: <Login /> },
             {path: "/cart", element: <Cart /> }
         ]
