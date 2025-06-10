@@ -1,0 +1,132 @@
+.productDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--gray-100);
+    min-height: 100vh;
+  
+    .productImage {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+  
+    .productInfo {
+      text-align: center;
+  
+      .productTitle {
+        font-size: 2.4rem;
+        font-weight: bold;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+  
+      .productPrice {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+  
+      .productDescription {
+        font-size: 1.6rem;
+        color: var(--text-dark);
+        margin-bottom: 2rem;
+      }
+  
+      .quantityControl {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+  
+        button {
+          font-size: 1.6rem;
+          width: 2.8rem;
+          height: 2.8rem;
+          background-color: var(--gray-200);
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+  
+          &:hover {
+            background-color: var(--gray-300);
+          }
+        }
+  
+        span {
+          font-size: 1.6rem;
+          min-width: 2rem;
+          display: inline-block;
+          text-align: center;
+        }
+      }
+  
+      .actionButtons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+  
+      .addToCartButton {
+        padding: 1rem 2rem;
+        background-color: var(--primary);
+        color: var(--white);
+        border: none;
+        border-radius: 8px;
+        font-size: 1.6rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+  
+        &:hover {
+          background-color: var(--primary-light);
+          transform: scale(1.05);
+        }
+  
+        &:active {
+          transform: scale(0.95);
+        }
+  
+        &:disabled {
+          background-color: var(--gray-300);
+          cursor: not-allowed;
+        }
+      }
+  
+      .checkoutButton {
+        padding: 1rem 2rem;
+        background-color: var(--accent-color, #ffa500);
+        color: var(--white);
+        border: none;
+        border-radius: 8px;
+        font-size: 1.6rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+  
+        &:hover {
+          background-color: #ffb347;
+          transform: scale(1.05);
+        }
+  
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+    }
+  
+    .errorMessage {
+      font-size: 1.8rem;
+      color: var(--gray-700);
+      text-align: center;
+      margin-top: 2rem;
+    }
+  }
+  
