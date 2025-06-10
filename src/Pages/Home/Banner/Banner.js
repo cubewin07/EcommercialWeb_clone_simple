@@ -1,8 +1,10 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, createContext } from "react";
 import styles from './Banner.module.scss';
-
+import Product from "../../../components/ProductDisplay/Product";
 const TIME_CHANGE = 5000; // Time in milliseconds to change the image
 const COOLDOWN_TIME = 500; // Cooldown time in milliseconds to prevent rapid changes
+
+export const BannerContext = createContext();
 function Banner({ images }) {
     const [index, setIndex] = useState(0);
     const [indexDots, setIndexDots] = useState(0);
@@ -38,48 +40,22 @@ function Banner({ images }) {
             setIndexDots(newIndex); // Update the dot index
         }, COOLDOWN_TIME); // Delay to allow the transition to complete
     };
+    const value = {
+        images,
+        index,
+        setIndex,
+        indexDots,
+        setIndexDots,
+        handleChangeImage,
+        totalImages,
+        startTimer,
+        timer
+    }
 
     return (
-        <div className={styles.banner}>
-            <div
-                className={styles.bannerWrapper}
-                style={{ transform: `translateX(-${index * 100}%)` }} // Slide effect
-                onMouseOver={() => clearInterval(timer.current)} // Pause on hover
-                onMouseOut={startTimer} // Resume on mouse out
-            >
-                {images.map((image, i) => (
-                    <img
-                        key={i}
-                        src={image}
-                        alt={`Banner ${i + 1}`}
-                        className={styles.bannerImage}
-                    />
-                ))}
-            </div>
-            <div className={styles.bannerDots}>
-                {images.map((_, i) => (
-                    <span
-                        key={i}
-                        className={`${styles.dot} ${i === indexDots ? styles.active : ''}`}
-                        onClick={() => handleChangeImage(i)}
-                    ></span>
-                ))}
-            </div>
-            <div className={styles.ChangeBanner}>
-                <button
-                    className={styles.prevButton}
-                    onClick={() => handleChangeImage(index === 0 ? totalImages - 1 : index - 1)}
-                >
-                    &lt;
-                </button>
-                <button
-                    className={styles.nextButton}
-                    onClick={() => handleChangeImage(index === totalImages - 1 ? 0 : index + 1)}
-                >
-                    &gt;
-                </button>
-            </div>
-        </div>
+        <BannerContext.Provider value={value}>
+            <Product banner={true}/>
+        </BannerContext.Provider>    
     );
 }
 
