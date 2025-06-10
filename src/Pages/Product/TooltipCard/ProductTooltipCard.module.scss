@@ -1,0 +1,31 @@
+.tooltipCard {
+    background-color: #ffffff;
+    border: 1px solid #cfd8dc;
+    border-radius: 8px;
+    padding: 1.2rem 1.6rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    font-size: 1.4rem;
+    min-width: 200px;
+    color: #37474f;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+  
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .label {
+    font-weight: 500;
+    color: #607d8b;
+  }
+  
+  .value {
+    font-weight: bold;
+    color: #263238;
+  }
+  
