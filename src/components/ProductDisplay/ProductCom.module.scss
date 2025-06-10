@@ -1,6 +1,7 @@
 .productCard {
   position: relative;
   background-color: var(--white);
+  min-width: 27.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
