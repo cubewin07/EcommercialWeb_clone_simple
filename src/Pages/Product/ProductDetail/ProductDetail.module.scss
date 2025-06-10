@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     padding: 2rem;
-    background-color: var(--gray-100);
+  background-color: #e6ecf0;
     min-height: 100vh;
   
     .productImage {
@@ -46,16 +46,17 @@
         margin-bottom: 2rem;
   
         button {
+          padding: 0 !important;
           font-size: 1.6rem;
           width: 2.8rem;
           height: 2.8rem;
-          background-color: var(--gray-200);
+          background-color: #cfd8dc;
           border: none;
           border-radius: 4px;
           cursor: pointer;
   
           &:hover {
-            background-color: var(--gray-300);
+            background-color: #b0bec5;
           }
         }
   
@@ -64,6 +65,7 @@
           min-width: 2rem;
           display: inline-block;
           text-align: center;
+          color: #263238;
         }
       }
   
@@ -76,7 +78,7 @@
   
       .addToCartButton {
         padding: 1rem 2rem;
-        background-color: var(--primary);
+        background-color: #00796b;
         color: var(--white);
         border: none;
         border-radius: 8px;
@@ -86,7 +88,7 @@
         transition: background-color 0.3s, transform 0.2s;
   
         &:hover {
-          background-color: var(--primary-light);
+          background-color: #009688;
           transform: scale(1.05);
         }
   
@@ -112,7 +114,7 @@
         transition: background-color 0.3s, transform 0.2s;
   
         &:hover {
-          background-color: #ffb347;
+          background-color: #fbc02d;
           transform: scale(1.05);
         }
   
