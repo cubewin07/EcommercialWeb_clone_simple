@@ -1,0 +1,18 @@
+.tooltip {
+    position: fixed;
+    background-color: #333;
+    color: #fff;
+    padding: 0.6rem 1rem;
+    font-size: 1.2rem;
+    border-radius: 6px;
+    pointer-events: none;
+    z-index: 1000;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+    opacity: 0.9;
+  }
+  
+  .tooltipTarget {
+    display: inline-block;
+    position: relative;
+  }
