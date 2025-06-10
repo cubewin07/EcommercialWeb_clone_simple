@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef, createContext } from "react";
-import styles from './Banner.module.scss';
-import Product from "../../../components/ProductDisplay/Product";
+import ProductCom from "../../../components/ProductDisplay/ProductCom";
 const TIME_CHANGE = 5000; // Time in milliseconds to change the image
 const COOLDOWN_TIME = 500; // Cooldown time in milliseconds to prevent rapid changes
 
@@ -54,7 +53,7 @@ function Banner({ images }) {
 
     return (
         <BannerContext.Provider value={value}>
-            <Product banner={true}/>
+            <ProductCom banner={true}/>
         </BannerContext.Provider>    
     );
 }

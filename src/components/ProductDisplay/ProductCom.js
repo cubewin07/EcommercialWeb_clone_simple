@@ -1,6 +1,6 @@
 import BannerProduct from "./bannerProduct/BannerProduct.js";
 
-function Product({banner, title, description, price, image}) {
+function ProductCom({banner, title, description, price, image}) {
     
     if(banner) {
         return <BannerProduct />
@@ -8,4 +8,4 @@ function Product({banner, title, description, price, image}) {
     
 }
 
-export default Product;
+export default ProductCom;
