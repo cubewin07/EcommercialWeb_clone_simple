@@ -12,6 +12,7 @@ function Product() {
                 {products.map(product => (
                     <ProductCom
                         key={product.id}
+                        id={product.id}
                         title={product.name}
                         description={product.description}
                         price={product.price}

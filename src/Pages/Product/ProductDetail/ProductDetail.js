@@ -8,9 +8,9 @@ function ProductDetail() {
     const { productId } = useParams();
     const { updateQuantity, addToCart, cart } = useContext(ShoppingContext);
 
-    // return (  
-
-    // );
+    return (  
+        <p> {productId}</p>
+    );
 }
 
 export default ProductDetail;
