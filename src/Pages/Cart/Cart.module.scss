@@ -166,6 +166,30 @@
       font-size: 2.4rem;
       font-weight: 700;
     }
+
+    .checkoutButton {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: 1.6rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+
+      &:hover {
+        background-color: var(--primary-light);
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      &:active {
+        transform: scale(0.95);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+    }
   }
 }
 @keyframes fadeIn {

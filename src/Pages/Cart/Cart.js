@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Cart.module.scss';
 import EmptyCart from './EmptyCart/EmptyCart';
 import { ShoppingContext } from '../../contexts/ShoppingProvider';
+import { useNavigate } from 'react-router-dom';
 
 function Cart() {
     const { cart, totalItems, totalPrice,removeFromCart, increaseItemQuantity, decreaseItemQuantity, updateQuantity } = useContext(ShoppingContext);
-
+    const Navigate = useNavigate();
     const handleRemoveItem = (id) => {
         if (cart.length === 1) {
             removeFromCart(id);
@@ -83,6 +84,9 @@ function Cart() {
                     <h2>
                         Grand Total: <span>${totalPrice.toFixed(2)}</span>
                     </h2>
+                    <button className={styles.checkoutButton} onClick={() => Navigate('/checkout')}>
+                        Checkout
+                    </button>
                 </div>
             </div>
         ) :
