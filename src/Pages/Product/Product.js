@@ -5,7 +5,7 @@ import styles from './Product.module.scss';
 import {products} from '../../ProductsData/Data.js'; // Assuming you have a JSON file with product data
 import ToolTipWrapper from '../../components/ToolTip/ToolTipWrapper.js';
 import { ShoppingContext } from '../../contexts/ShoppingProvider.js';
-import ProductTooltipCard from './TooltipCard/TooltipCard.js';
+import ProductTooltipCard from '../../components/ToolTip/TooltipCard/TooltipCard.js';
 
 function Product() {
     const {cart} = useContext(ShoppingContext)
