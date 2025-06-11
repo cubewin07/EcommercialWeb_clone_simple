@@ -8,19 +8,6 @@ import {TextField, Button, styled} from '@mui/material'
 import styles from './login.module.scss'
 import { AuthenContext } from '../../contexts/AuthenProvider'
 
-const loginSchema = z.object({
-    username: z.string({
-        required_error: 'Username is required',
-    }).nonempty({ message: 'Username is required' }).min(3),
-    email: z.string({
-        required_error: 'Email is required',
-    }).nonempty({ message: 'Email is required' }).email(),
-    password: z.string({
-        required_error: 'Password is required',
-        invalid_type_error: 'Password must be a string',
-    }).nonempty({ message: 'Password is required' }).min(8),
-})
-
 
 const CustomTextField = styled(TextField)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#2e2e2e' : '#fcf8e3',
@@ -80,7 +67,6 @@ function Login() {
         watch,
         trigger
     } = useForm({
-        resolver: zodResolver(loginSchema),
         mode: 'onChange',
         defaultValues: {
             username: '',
@@ -186,9 +172,14 @@ function Login() {
                             fullWidth
                             margin='normal'
                             {...register('username', {
-                                validate: (value) => {
-                                    const user = Object.values(userList).find(user => user.username === value);
-                                    return user ? true : 'Username does not exist';
+                                required: 'This field cannot be empty',
+                                minLength: {
+                                    value: 3,
+                                    message: 'Must have at least 3 characters'
+                                },
+                                validate: value => {
+                                    console.log('Running');
+                                    return userList?.[value] || 'Wrong username, please register'
                                 }
                             })}
                             error={showUsernameError && !!errors.username}
@@ -199,10 +190,19 @@ function Login() {
                             variant="outlined"
                             fullWidth
                             margin='normal'
-                            {...register('email',  {
-                                validate: (value) => {
-                                    const user = Object.values(userList).find(user => user.email === value);
-                                    return user ? true : 'Email does not exist';
+                            {...register('email', {
+                                required: 'This field cannot be empty',
+                                email: 'Invalid email',
+                                validate: value => {
+                                    if(userList[username])
+                                        return userList[username].email === value || "Wrong email"
+                                    else {
+                                        if(username.trim() === '')
+                                            return 'Please enter your username'
+                                        else
+                                            return 'Your username has not registerd'
+                                    }
+                                        
                                 }
                             })}
                             error={showEmailError && !!errors.email}
@@ -215,9 +215,13 @@ function Login() {
                             fullWidth
                             margin='normal'
                             {...register('password', {
-                                validate: (value) => {
-                                    const user = Object.values(userList).find(user => user.password === value);
-                                    return user ? true : 'Incorrect password';
+                                required: 'This field cannot be empty',
+                                minLength: {
+                                    value: 8,
+                                    message: 'Must have at least 8 characters'
+                                },
+                                validate: value => {
+                                    return userList?.[username].password === value || "Wrong password"
                                 }
                             })}
                             error={showPasswordError && !!errors.password}
