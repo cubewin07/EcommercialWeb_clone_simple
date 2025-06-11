@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { ShoppingContext } from "../../contexts/ShoppingProvider";
 import { AuthenContext } from "../../contexts/AuthenProvider";
+import { useNavigate } from "react-router-dom";
 import styles from './Dashboard.module.scss';
 
 function Dashboard() {
-    const { isAuthenticated, name } = useContext(AuthenContext);
+    const { isAuthenticated, name, logout } = useContext(AuthenContext);
     const { cart } = useContext(ShoppingContext);
+    const navigate = useNavigate()
 
     const totalOrders = 3; // Example, replace with actual logic
     const recentOrders = [
@@ -13,6 +15,11 @@ function Dashboard() {
         { id: '67890', date: '2025-05-25', status: 'Processing', total: '$89.99' },
         { id: '24680', date: '2025-05-01', status: 'Delivered', total: '$45.50' },
     ]; // Example data
+
+    const handleLogout = () => {
+        logout()
+        navigate('/')
+    }
 
     return (
         <div className={styles.dashboardContainer}>
@@ -24,7 +31,7 @@ function Dashboard() {
                     <li>Orders</li>
                     <li>Addresses</li>
                     <li>Settings</li>
-                    <li>Logout</li>
+                    <li onClick={handleLogout}>Logout</li>
                 </ul>
             </aside>
 
