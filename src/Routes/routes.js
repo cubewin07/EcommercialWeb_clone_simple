@@ -1,4 +1,5 @@
-import { createBrowserRouter } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { createBrowserRouter, useNavigate } from "react-router-dom";
 
 import Layout from "../Layout/Layout.js";
 import Home from "../Pages/Home/Home.js";
@@ -9,6 +10,26 @@ import ProductDetail from "../Pages/Product/ProductDetail/ProductDetail.js";
 import Register from "../Pages/Register/Register.js";
 import NotFound404 from "../Pages/notFound404/NotFound404.js";
 
+import { AuthenContext } from "../contexts/AuthenProvider.js";
+
+function Private({children}) {
+    const navigate = useNavigate()
+    const {isAuthenticated} = useContext(AuthenContext)
+    useEffect(() => {
+        if(!isAuthenticated) {
+            navigate('/login')
+        }
+    },[isAuthenticated, navigate])
+    return isAuthenticated ? children : null
+}
+
+// function Public({children}) {
+//     const navigate = useNavigate()
+//     const {isAuthenticated} = useContext(AuthenContext)
+
+//     return isAuthenticated ? null : children
+// }
+
 export const routes = createBrowserRouter([
     {
         path: "/",
@@ -17,7 +38,7 @@ export const routes = createBrowserRouter([
             { index: true, element: <Home /> },
             { path: "/product", element: <Product /> },
             { path: "/product/:productId", element: <ProductDetail /> }, 
-            { path: "/login", element: <Login /> },
+            { path: "/login", element: <Login />  },
             { path: "/register", element: <Register />},
             {path: "/cart", element: <Cart /> }
         ]
