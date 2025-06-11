@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { createBrowserRouter, useNavigate } from "react-router-dom";
+import { createHashRouter, useNavigate } from "react-router-dom";
 
 import Layout from "../Layout/Layout.js";
 import Home from "../Pages/Home/Home.js";
@@ -31,7 +31,7 @@ function Private({children}) {
 //     return isAuthenticated ? null : children
 // }
 
-export const routes = createBrowserRouter([
+export const routes = createHashRouter([
     {
         path: "/",
         element: <Layout />,
