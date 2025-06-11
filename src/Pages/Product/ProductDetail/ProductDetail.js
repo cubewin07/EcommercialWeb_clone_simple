@@ -1,12 +1,16 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { ShoppingContext } from '../../../contexts/ShoppingProvider';
 import { products } from '../../../ProductsData/Data';
+import { AuthenContext } from '../../../contexts/AuthenProvider';
 import styles from './ProductDetail.module.scss';
 
 function ProductDetail() {
+  const Navigate = useNavigate()
+
   const { productId } = useParams();
   const { addToCart, cart, updateQuantity } = useContext(ShoppingContext);
+  const {isAuthenticated} = useContext(AuthenContext)
   const [quantity, setQuantity] = useState(1);
 
   const product = products.find(p => p.id === parseInt(productId));
@@ -17,12 +21,17 @@ function ProductDetail() {
   }
 
   const handleAddToCart = () => {
-    if (isInCart) {
-      updateQuantity(product.id, quantity);
+    if(!isAuthenticated) {
+      Navigate('/login')
+      // console.log(isAuthenticated);
     } else {
-      addToCart({ ...product, quantity });
+      if (isInCart) {
+        updateQuantity(product.id, quantity);
+      } else {
+        addToCart({ ...product, quantity });
+      }
+      setQuantity(1); 
     }
-    setQuantity(1); 
   };
 
   const handleCheckout = () => {
