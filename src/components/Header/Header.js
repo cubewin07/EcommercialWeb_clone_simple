@@ -23,12 +23,13 @@ function Header() {
         }
     };
 
+    const headerImage = `${process.env.PUBLIC_URL}/assets/images/ShopLogo.png`
     return (
         <>
             <header className={styles.header}>
                 <div className={styles.logo}>
                     <Link to="/" className={styles.logoLink}>
-                        <img src="/assets/images/ShopLogo.png" alt="MyShop Logo" className={styles.logoImage} />
+                        <img src={headerImage} alt="MyShop Logo" className={styles.logoImage} />
                     </Link>
                 </div>
                 <nav className={styles.nav}>
