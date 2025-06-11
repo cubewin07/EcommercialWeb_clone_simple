@@ -1,7 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { Link, useNavigate } from 'react-router-dom'
 import {TextField, Button, styled} from '@mui/material'
 
@@ -150,7 +148,6 @@ function Login() {
     }, [password])
 
     const onSubmit = (data) => {
-        console.log(data)
         login(data.username)
         navigate('/', {state:{user: data.username}, replace: true})
     }
