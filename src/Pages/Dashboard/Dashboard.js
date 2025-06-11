@@ -4,7 +4,7 @@ import { AuthenContext } from "../../contexts/AuthenProvider";
 import styles from './Dashboard.module.scss';
 
 function Dashboard() {
-    const { isAuthenticated, username } = useContext(AuthenContext);
+    const { isAuthenticated, name } = useContext(AuthenContext);
     const { cart } = useContext(ShoppingContext);
 
     const totalOrders = 3; // Example, replace with actual logic
@@ -18,7 +18,7 @@ function Dashboard() {
         <div className={styles.dashboardContainer}>
             <aside className={styles.sidebar}>
                 <div className={styles.profilePic}></div>
-                <p className={styles.userName}>{username || 'User Name'}</p>
+                <p className={styles.userName}>{name || 'User Name'}</p>
                 <ul className={styles.navList}>
                     <li>Profile</li>
                     <li>Orders</li>
@@ -30,7 +30,7 @@ function Dashboard() {
 
             <section className={styles.content}>
                 <h2>Overview</h2>
-                <h1>Hello, {username || 'User Name'}</h1>
+                <h1>Hello, {name}</h1>
 
                 <div className={styles.buttons}>
                     <button>{totalOrders} Orders</button>

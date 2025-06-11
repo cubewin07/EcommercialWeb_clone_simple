@@ -4,6 +4,7 @@ import { createBrowserRouter, useNavigate } from "react-router-dom";
 import Layout from "../Layout/Layout.js";
 import Home from "../Pages/Home/Home.js";
 import Login from "../Pages/login/login.js";
+import Dashboard from "../Pages/Dashboard/Dashboard.js";
 import Cart from "../Pages/Cart/Cart.js";
 import Product from "../Pages/Product/Product.js";
 import ProductDetail from "../Pages/Product/ProductDetail/ProductDetail.js";
@@ -39,6 +40,9 @@ export const routes = createBrowserRouter([
             { path: "/product", element: <Product /> },
             { path: "/product/:productId", element: <ProductDetail /> }, 
             { path: "/login", element: <Login />  },
+            { path: "/user/dashboard", element: <Dashboard />},
+            { path: '/user', element: <Dashboard />},
+            { path: '/dashboard', element: <Dashboard />},
             { path: "/register", element: <Register />},
             {path: "/cart", element: <Cart /> }
         ]

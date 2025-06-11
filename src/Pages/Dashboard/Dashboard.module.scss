@@ -1,7 +1,7 @@
 .dashboardContainer {
     display: flex;
     min-height: 100vh;
-    background-color: #f5f5f5;
+    background-color: #e9eef2;
   
     @media (max-width: 768px) {
       flex-direction: column;
@@ -10,7 +10,7 @@
   
   .sidebar {
     width: 220px;
-    background-color: #f0f0f0;
+    background-color: #dfe6ec;
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -28,6 +28,7 @@
       font-weight: bold;
       margin-bottom: 2rem;
       text-align: center;
+      color: #333;
     }
   
     .navList {
@@ -40,6 +41,7 @@
         cursor: pointer;
         font-weight: 500;
         text-align: center;
+        color: #333;
         transition: color 0.2s;
   
         &:hover {
@@ -53,8 +55,9 @@
       justify-content: space-around;
       width: 100%;
       padding: 1rem;
+  
       .navList {
-        display: none; // Hide sidebar nav on small screens
+        display: none;
       }
     }
   }
@@ -66,6 +69,7 @@
     h1 {
       font-size: 2.4rem;
       margin: 0.5rem 0 2rem;
+      color: #333;
     }
   
     .buttons {
@@ -76,15 +80,16 @@
   
       button {
         padding: 1rem 2rem;
-        border: 1px solid #ccc;
-        background-color: #eee;
+        background-color: #007b8a;
+        color: white;
+        border: none;
         border-radius: 8px;
         font-weight: 600;
         cursor: pointer;
-        white-space: nowrap;
+        transition: background-color 0.2s ease;
   
         &:hover {
-          background-color: #ddd;
+          background-color: #005f6b;
         }
       }
     }
@@ -92,6 +97,7 @@
     .recentOrders {
       h3 {
         margin-bottom: 1rem;
+        color: #333;
       }
   
       table {
@@ -108,8 +114,13 @@
         }
   
         th {
-          background-color: #f2f2f2;
+          background-color: #dfe6ec;
           font-weight: bold;
+          color: #333;
+        }
+  
+        td {
+          color: #444;
         }
       }
   
@@ -144,6 +155,7 @@
           &::before {
             content: attr(data-label);
             font-weight: bold;
+            color: #007b8a;
           }
         }
       }
@@ -151,6 +163,7 @@
   
     @media (max-width: 768px) {
       padding: 2rem;
+  
       h1 {
         font-size: 2rem;
         text-align: center;
