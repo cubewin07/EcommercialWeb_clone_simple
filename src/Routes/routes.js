@@ -5,8 +5,9 @@ import Home from "../Pages/Home/Home.js";
 import Login from "../Pages/login/login.js";
 import Cart from "../Pages/Cart/Cart.js";
 import Product from "../Pages/Product/Product.js";
-import NotFound404 from "../Pages/notFound404/NotFound404.js";
 import ProductDetail from "../Pages/Product/ProductDetail/ProductDetail.js";
+import Register from "../Pages/Register/Register.js";
+import NotFound404 from "../Pages/notFound404/NotFound404.js";
 
 export const routes = createBrowserRouter([
     {
@@ -17,6 +18,7 @@ export const routes = createBrowserRouter([
             { path: "/product", element: <Product /> },
             { path: "/product/:productId", element: <ProductDetail /> }, 
             { path: "/login", element: <Login /> },
+            { path: "/register", element: <Register />},
             {path: "/cart", element: <Cart /> }
         ]
     },

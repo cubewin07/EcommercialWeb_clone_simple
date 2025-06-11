@@ -71,7 +71,7 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
 
 const TIMEOUT = 2000
 
-function Login() {
+function Register() {
     const {userList, setIsAuthenticated, login} = useContext(AuthenContext)
     const { 
         register, 
@@ -170,16 +170,16 @@ function Login() {
     }
 
     return (  
-        <section className={styles.loginSection}>
-            <div className={styles.loginWrapper}>
-                <div className={styles.sidePanel}>
-                    <div className={styles.welcomeIcon}>🛍️</div>
-                    <h2>Welcome Back!</h2>
-                    <p>Sign in to continue shopping with <b>MyShop</b>.<br/>Enjoy exclusive deals and a seamless experience.</p>
-                </div>
-                <div className={styles.formPanel}>
-                    <form onSubmit={handleSubmit(onSubmit)} className={styles.loginForm}>
-                        <h2>Login</h2>
+        <section className={styles.registerSection}>
+            <div className={styles.registerWrapper}>
+                <div className={styles.registerSidePanel}>
+                    <div className={styles.registerIcon}>🎉</div>
+                        <h2>Join the Family!</h2>
+                        <p>Create your account with <b>MyShop</b>.<br/>Start enjoying exclusive member perks.</p>
+                    </div>
+                <div className={styles.registerFormPanel}>
+                    <form onSubmit={handleSubmit(onSubmit)} className={styles.registerForm}>
+                        <h2>Create Account</h2>
                         <CustomTextField
                             label="Username"
                             variant="outlined"
@@ -232,10 +232,10 @@ function Login() {
                             // disabled={!isValid}
                             className={styles.submitButton}
                         >
-                            Login
+                            Register
                         </Button>
                         <div className={styles.socialLogin}>
-                            <span>or login with</span>
+                            <span>or register with</span>
                             <button type="button" className={styles.googleBtn}>
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png" alt="Google" /> Google
                             </button>
@@ -243,7 +243,7 @@ function Login() {
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" /> Facebook
                             </button>
                         </div>
-                        <p>Don't have an account? <Link to="/register">Register</Link></p>
+                        <p>Already have an account? <Link to="/login">Login</Link></p>
                     </form>
                 </div>
             </div>
@@ -251,4 +251,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;

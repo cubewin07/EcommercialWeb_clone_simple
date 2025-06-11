@@ -344,3 +344,107 @@
     }
   }
   
+// Regist form
+
+  .registerSection {
+    @extend .loginSection;
+    background: linear-gradient(135deg, #f3ecff 0%, #e9defa 100%);
+    // background-color: #f5f5f5
+  }
+
+  
+  .registerWrapper {
+    @extend .loginWrapper;
+  }
+  
+  .registerSidePanel {
+    @extend .sidePanel;
+    background: linear-gradient(135deg, #a066c9 60%, #d59bf6 100%);
+  }
+  
+  .registerIcon {
+    @extend .welcomeIcon;
+  }
+  
+  .registerSidePanel h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  
+  .registerSidePanel p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  
+  .registerFormPanel {
+    @extend .formPanel;
+    background: #ffffff;
+  }
+  
+  .registerForm {
+    @extend .loginForm;
+  
+    h2 {
+      color: #6a1b9a;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+  
+    button[type="submit"] {
+      width: 100%;
+      padding: 0.8rem;
+      background: linear-gradient(270deg, #a066c9, #d59bf6);
+      background-size: 200% 100%;
+      background-position: left;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition:
+        background-position 1s ease,
+        transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-top: 1rem;
+      box-shadow: 0 2px 8px rgba(163, 94, 255, 0.08);
+  
+      &:hover {
+        background-position: right;
+        transform: scale(1.04);
+        box-shadow: 0 4px 16px rgba(163, 94, 255, 0.15);
+      }
+  
+      &:active {
+        transform: scale(0.98);
+        box-shadow: 0 1px 4px rgba(163, 94, 255, 0.08);
+      }
+    }
+  }
+  
+  .registerForm .socialLogin span {
+    color: #6b3f94;
+  }
+  
+  @media (max-width: 900px) {
+    .registerWrapper {
+      flex-direction: column;
+      max-width: 95vw;
+    }
+  
+    .registerSidePanel,
+    .registerFormPanel {
+      min-width: 0;
+      width: 100%;
+      border-radius: 0;
+      padding: 32px 12px;
+    }
+  
+    .registerFormPanel {
+      padding-top: 0;
+    }
+  }
+  
