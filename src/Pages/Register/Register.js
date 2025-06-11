@@ -8,17 +8,20 @@ import {TextField, Button, styled} from '@mui/material'
 import styles from './Register.module.scss'
 import { AuthenContext } from '../../contexts/AuthenProvider'
 
-const loginSchema = z.object({
-    username: z.string({
-        required_error: 'Username is required',
-    }).nonempty({ message: 'Username is required' }).min(3),
-    email: z.string({
-        required_error: 'Email is required',
-    }).nonempty({ message: 'Email is required' }).email(),
-    password: z.string({
-        required_error: 'Password is required',
-        invalid_type_error: 'Password must be a string',
-    }).nonempty({ message: 'Password is required' }).min(8),
+const RegisterSchema = (userList) =>
+     z.object({
+        username: z.string({
+            required_error: 'Username is required',
+        }).nonempty({ message: 'Username is required' }).min(3),
+
+        email: z.string({
+            required_error: 'Email is required',
+        }).nonempty({ message: 'Email is required' }).email(),
+
+        password: z.string({
+            required_error: 'Password is required',
+            invalid_type_error: 'Password must be a string',
+        }).nonempty({ message: 'Password is required' }).min(8),
 })
 
 
@@ -72,7 +75,7 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
 const TIMEOUT = 2000
 
 function Register() {
-    const {userList, setIsAuthenticated, login} = useContext(AuthenContext)
+    const {userList, registerUser} = useContext(AuthenContext)
     const { 
         register, 
         handleSubmit, 
@@ -80,7 +83,7 @@ function Register() {
         watch,
         trigger
     } = useForm({
-        resolver: zodResolver(loginSchema),
+        resolver: zodResolver(RegisterSchema(userList)),
         mode: 'onChange',
         defaultValues: {
             username: '',
@@ -164,11 +167,11 @@ function Register() {
     }, [password])
 
     const onSubmit = (data) => {
-        console.log(data)
-        login(data.username)
+        registerUser(data)
         navigate('/', {state:{user: data.username}, replace: true})
     }
 
+    console.log(userList[username], username);
     return (  
         <section className={styles.registerSection}>
             <div className={styles.registerWrapper}>
@@ -185,12 +188,7 @@ function Register() {
                             variant="outlined"
                             fullWidth
                             margin='normal'
-                            {...register('username', {
-                                validate: (value) => {
-                                    const user = Object.values(userList).find(user => user.username === value);
-                                    return user ? true : 'Username does not exist';
-                                }
-                            })}
+                            {...register('username')}
                             error={showUsernameError && !!errors.username}
                             helperText={showUsernameError && errors.username ? errors.username.message : ''}
                         />
@@ -199,12 +197,7 @@ function Register() {
                             variant="outlined"
                             fullWidth
                             margin='normal'
-                            {...register('email',  {
-                                validate: (value) => {
-                                    const user = Object.values(userList).find(user => user.email === value);
-                                    return user ? true : 'Email does not exist';
-                                }
-                            })}
+                            {...register('email')}
                             error={showEmailError && !!errors.email}
                             helperText={showEmailError && errors.email ? errors.email.message : ''}
                         />
@@ -214,12 +207,7 @@ function Register() {
                             variant="outlined"
                             fullWidth
                             margin='normal'
-                            {...register('password', {
-                                validate: (value) => {
-                                    const user = Object.values(userList).find(user => user.password === value);
-                                    return user ? true : 'Incorrect password';
-                                }
-                            })}
+                            {...register('password')}
                             error={showPasswordError && !!errors.password}
                             helperText={showPasswordError && errors.password ? errors.password.message : ''}
                         />
