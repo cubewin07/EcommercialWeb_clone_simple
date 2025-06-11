@@ -10,18 +10,34 @@ import { AuthenContext } from '../../contexts/AuthenProvider'
 
 const RegisterSchema = (userList) =>
      z.object({
-        username: z.string({
-            required_error: 'Username is required',
-        }).nonempty({ message: 'Username is required' }).min(3),
+        username: z
+            .string({
+                required_error: 'Username is required',
+            })
+            .nonempty({ message: 'Username is required' })
+            .min(3)
+            .refine(value => !userList?.[value], {message: 'Username has already taken'})
+        ,
 
-        email: z.string({
-            required_error: 'Email is required',
-        }).nonempty({ message: 'Email is required' }).email(),
+        email: z
+            .string({
+                required_error: 'Email is required',
+            })
+            .nonempty({ message: 'Email is required' }).email()
+            .refine( value => (
+                !Object.values(userList).find(userlist => userlist.email === value)
+            ), {
+                message: 'This email is already taken'
+            })
+        ,
 
-        password: z.string({
-            required_error: 'Password is required',
-            invalid_type_error: 'Password must be a string',
-        }).nonempty({ message: 'Password is required' }).min(8),
+        password: z
+            .string({
+                required_error: 'Password is required',
+                invalid_type_error: 'Password must be a string',
+            })
+            .nonempty({ message: 'Password is required' })
+            .min(8),
 })
 
 
