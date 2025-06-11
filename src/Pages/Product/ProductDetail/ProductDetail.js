@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { ShoppingContext } from '../../../contexts/ShoppingProvider';
-import { products } from '../../../Products/Data';
+import { products } from '../../../ProductsData/Data';
 import styles from './ProductDetail.module.scss';
 
 function ProductDetail() {

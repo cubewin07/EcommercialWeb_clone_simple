@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import ProductCom from '../../components/ProductDisplay/ProductCom';
 import styles from './Product.module.scss';
-import {products} from '../../Products/Data.js'; // Assuming you have a JSON file with product data
+import {products} from '../../ProductsData/Data.js'; // Assuming you have a JSON file with product data
 import ToolTipWrapper from '../../components/ToolTip/ToolTipWrapper.js';
 import { ShoppingContext } from '../../contexts/ShoppingProvider.js';
 import ProductTooltipCard from './TooltipCard/TooltipCard.js';
