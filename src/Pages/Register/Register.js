@@ -187,7 +187,6 @@ function Register() {
         navigate('/', {state:{user: data.username}, replace: true})
     }
 
-    console.log(userList[username], username);
     return (  
         <section className={styles.registerSection}>
             <div className={styles.registerWrapper}>
