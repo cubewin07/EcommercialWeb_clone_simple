@@ -223,6 +223,8 @@ function Login() {
                                     message: 'Must have at least 8 characters'
                                 },
                                 validate: value => {
+                                    if(username.trim() === '')
+                                        return 'Please enter your username'
                                     return userList?.[username].password === value || "Wrong password"
                                 }
                             })}
