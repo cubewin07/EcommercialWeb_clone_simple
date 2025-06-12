@@ -59,8 +59,8 @@ const TIMEOUT = 2000
 function Login() {
     const {userList, setIsAuthenticated, login} = useContext(AuthenContext)
     const location = useLocation()
-    const state = location.state;
-    const isBrowsing = state.isBrowsing
+    const state = location?.state;
+    const isBrowsing = state?.isBrowsing
     const { 
         register, 
         handleSubmit, 
@@ -68,7 +68,7 @@ function Login() {
         watch,
         trigger
     } = useForm({
-        mode: 'onChange',
+        mode: 'all',
         defaultValues: {
             username: '',
             email: '',
@@ -127,7 +127,7 @@ function Login() {
                 clearTimeout(timer)
             }
         }
-    }, [email])
+    }, [email, username])
 
     useEffect(() => {
         let timer
@@ -148,7 +148,7 @@ function Login() {
                 clearTimeout(timer)
             }
         }
-    }, [password])
+    }, [password, username, email])
 
     const onSubmit = (data) => {
         login(data.username)
