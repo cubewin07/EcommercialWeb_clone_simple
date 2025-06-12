@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation, replace } from 'react-router-dom'
 import {TextField, Button, styled} from '@mui/material'
 
 import styles from './login.module.scss'
@@ -58,6 +58,9 @@ const TIMEOUT = 2000
 
 function Login() {
     const {userList, setIsAuthenticated, login} = useContext(AuthenContext)
+    const location = useLocation()
+    const state = location.state;
+    const isBrowsing = state.isBrowsing
     const { 
         register, 
         handleSubmit, 
@@ -149,6 +152,8 @@ function Login() {
 
     const onSubmit = (data) => {
         login(data.username)
+        if(isBrowsing)
+            navigate(-1, {replace: true})
         navigate('/', {state:{user: data.username}, replace: true})
     }
 

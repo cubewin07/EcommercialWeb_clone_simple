@@ -22,7 +22,7 @@ function ProductDetail() {
 
   const handleAddToCart = () => {
     if(!isAuthenticated) {
-      Navigate('/login')
+      Navigate('/login', {state: {isBrowsing: true}})
 
         // 'then after login it have to move back to this'
       // console.log(isAuthenticated);
