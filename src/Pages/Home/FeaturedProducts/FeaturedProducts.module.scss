@@ -29,7 +29,7 @@
   }
 
   .productCard {
-    /* Because there are 3 cards per “page” and 2 gaps of 2rem each,
+    /* Because there are 3 cards per "page" and 2 gaps of 2rem each,
        each card must be exactly (100% - 4rem) / 3 wide. */
     flex: 0 0 calc((100% - 4rem) / 3);
     max-width: calc((100% - 4rem) / 3);
@@ -39,6 +39,7 @@
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
 
     &:hover {
       transform: translateY(-10px);
@@ -107,5 +108,135 @@
         transform: scale(1.05);
       }
     }
+  }
+}
+
+// Modal Styles
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+  animation: slideIn 0.3s ease;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e2e8f0;
+
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+  }
+
+  .closeButton {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #718096;
+    cursor: pointer;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #f7fafc;
+      color: #4a5568;
+    }
+  }
+}
+
+.modalBody {
+  padding: 2rem;
+  text-align: center;
+
+  p {
+    font-size: 1.4rem;
+    color: #4a5568;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.modalFooter {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid #e2e8f0;
+  justify-content: flex-end;
+
+  .cancelButton,
+  .loginButton {
+    padding: 0.8rem 1.6rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .cancelButton {
+    background-color: #e2e8f0;
+    color: #4a5568;
+
+    &:hover {
+      background-color: #cbd5e0;
+    }
+  }
+
+  .loginButton {
+    background: linear-gradient(135deg, #009688 0%, #43e97b 100%);
+    color: white;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 150, 136, 0.3);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
