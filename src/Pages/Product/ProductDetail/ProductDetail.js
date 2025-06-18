@@ -17,15 +17,23 @@ function ProductDetail() {
   const isInCart = cart.some(item => item.id === product?.id);
 
   if (!product) {
-    return <div className={styles.errorMessage}>Product not found.</div>;
+    return (
+      <div className={styles.errorContainer}>
+        <div className={styles.errorCard}>
+          <div className={styles.errorIcon}>❌</div>
+          <h2>Product Not Found</h2>
+          <p>The product you're looking for doesn't exist.</p>
+          <button onClick={() => Navigate('/product')} className={styles.backButton}>
+            Back to Products
+          </button>
+        </div>
+      </div>
+    );
   }
 
   const handleAddToCart = () => {
     if(!isAuthenticated) {
       Navigate('/login', {state: {isBrowsing: true}})
-
-        // 'then after login it have to move back to this'
-      // console.log(isAuthenticated);
     } else {
       if (isInCart) {
         updateQuantity(product.id, quantity);
@@ -45,37 +53,110 @@ function ProductDetail() {
   const decreaseQty = () => setQuantity(q => (q > 1 ? q - 1 : 1));
 
   return (
-    <div className={styles.productDetail}>
-      <img src={product.image} alt={product.name} className={styles.productImage} />
-
-      <div className={styles.productInfo}>
-        <h1 className={styles.productTitle}>{product.name}</h1>
-        <p className={styles.productPrice}>${product.price.toFixed(2)}</p>
-        <div className={styles.productRating}>
-          <span className={styles.stars}>
-            {'★'.repeat(Math.floor(product.rating))}{'☆'.repeat(5 - Math.floor(product.rating))}
-          </span>
-          <span className={styles.ratingText}>{product.rating.toFixed(1)} ({product.reviews} reviews)</span>
-        </div>
-        <p className={styles.productDescription}>{product.description}</p>
-
-        <div className={styles.quantityControl}>
-          <button onClick={decreaseQty}>−</button>
-          <span>{quantity}</span>
-          <button onClick={increaseQty}>+</button>
+    <div className={styles.productDetailContainer}>
+      <div className={styles.productGrid}>
+        {/* Product Image Card */}
+        <div className={styles.imageCard}>
+          <div className={styles.cardHeader}>
+            <h2 className={styles.cardTitle}>Product Image</h2>
+          </div>
+          <div className={styles.cardBody}>
+            <img 
+              src={product.image} 
+              alt={product.name} 
+              className={styles.productImage} 
+            />
+          </div>
         </div>
 
-        <div className={styles.actionButtons}>
-          <button
-            className={styles.addToCartButton}
-            onClick={handleAddToCart}
-          >
-            Add to Cart
-          </button>
+        {/* Product Info Card */}
+        <div className={styles.infoCard}>
+          <div className={styles.cardHeader}>
+            <h2 className={styles.cardTitle}>Product Details</h2>
+          </div>
+          <div className={styles.cardBody}>
+            <h1 className={styles.productTitle}>{product.name}</h1>
+            
+            <div className={styles.priceSection}>
+              <span className={styles.priceLabel}>Price:</span>
+              <span className={styles.productPrice}>${product.price.toFixed(2)}</span>
+            </div>
 
-          <button className={styles.checkoutButton} onClick={handleCheckout}>
-            Checkout
-          </button>
+            <div className={styles.ratingSection}>
+              <span className={styles.ratingLabel}>Rating:</span>
+              <div className={styles.productRating}>
+                <span className={styles.stars}>
+                  {'★'.repeat(Math.floor(product.rating))}
+                  {'☆'.repeat(5 - Math.floor(product.rating))}
+                </span>
+                <span className={styles.ratingText}>
+                  {product.rating.toFixed(1)} ({product.reviews} reviews)
+                </span>
+              </div>
+            </div>
+
+            <div className={styles.descriptionSection}>
+              <h3 className={styles.descriptionTitle}>Description</h3>
+              <p className={styles.productDescription}>{product.description}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Card */}
+        <div className={styles.actionCard}>
+          <div className={styles.cardHeader}>
+            <h2 className={styles.cardTitle}>Purchase Options</h2>
+          </div>
+          <div className={styles.cardBody}>
+            <div className={styles.quantitySection}>
+              <label className={styles.quantityLabel}>Quantity:</label>
+              <div className={styles.quantityControl}>
+                <button 
+                  onClick={decreaseQty}
+                  className={styles.quantityBtn}
+                  disabled={quantity <= 1}
+                >
+                  −
+                </button>
+                <span className={styles.quantityDisplay}>{quantity}</span>
+                <button 
+                  onClick={increaseQty}
+                  className={styles.quantityBtn}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            <div className={styles.totalSection}>
+              <span className={styles.totalLabel}>Total:</span>
+              <span className={styles.totalPrice}>
+                ${(product.price * quantity).toFixed(2)}
+              </span>
+            </div>
+
+            <div className={styles.actionButtons}>
+              <button
+                className={styles.addToCartButton}
+                onClick={handleAddToCart}
+              >
+                {isInCart ? 'Update Cart' : 'Add to Cart'}
+              </button>
+
+              <button 
+                className={styles.checkoutButton} 
+                onClick={handleCheckout}
+              >
+                Buy Now
+              </button>
+            </div>
+
+            {!isAuthenticated && (
+              <div className={styles.loginPrompt}>
+                <p>Please log in to add items to your cart</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
