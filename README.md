@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# MyShop — Shoppe Clone (Simple)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+- A simple e‑commerce front‑end inspired by Shopee. It focuses on product browsing, product details, and a functional shopping cart, with basic authentication and a user dashboard.
 
-## Available Scripts
+## Why I Built This
+- This is my first project to get comfortable with React and JavaScript. I wanted hands‑on practice with components, routing, state management, forms, styling, and common UI patterns used in modern web apps.
 
-In the project directory, you can run:
+## What I Learned
+- React fundamentals: components, props, JSX, and hooks (useState, useEffect, useContext).
+- Global state with Context + useReducer for a shopping cart.
+- Client‑side routing with React Router v6 (createHashRouter).
+- Form handling and validation using react‑hook‑form and Zod.
+- Authentication basics with Context and localStorage (login/register/logout).
+- Styling with SCSS Modules and a simple GlobalStyles wrapper.
+- UI animations using Framer Motion for cart interactions.
+- Building a banner carousel and hover tooltips with controlled navigation.
+- UX safeguards: 404 page, “login required” modal, and product‑not‑found handling.
 
-### `npm start`
+## Features Added
+- Home page with image banner carousel and featured products.
+- Product listing grid with hover tooltip showing rating/reviews and in‑cart quantity.
+- Product detail page with add‑to‑cart and quantity update.
+- Shopping cart with increase/decrease quantity, remove items, per‑item totals, grand total, animated transitions, and an empty‑cart state.
+- Authentication: register with validation, login/logout; protected actions (e.g., view cart, add to cart) prompt login.
+- Dashboard page placeholder with logout and sample recent orders.
+- Header with animated cart count and protected cart icon navigation.
+- Routing across Home, Products, Product Detail, Cart, Login, Register, Dashboard, and a custom 404 page.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Tech Notes
+- Built with Create React App, React Router, Context + useReducer, SCSS Modules, Framer Motion, Material UI, React Hook Form, and Zod.
