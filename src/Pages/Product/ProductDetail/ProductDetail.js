@@ -1,165 +1,154 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
+import { motion } from 'framer-motion';
 import { ShoppingContext } from '../../../contexts/ShoppingProvider';
 import { products } from '../../../ProductsData/Data';
 import { AuthenContext } from '../../../contexts/AuthenProvider';
 import styles from './ProductDetail.module.scss';
 
 function ProductDetail() {
-  const Navigate = useNavigate()
-
+  const Navigate = useNavigate();
   const { productId } = useParams();
   const { addToCart, cart, updateQuantity } = useContext(ShoppingContext);
-  const {isAuthenticated} = useContext(AuthenContext)
+  const { isAuthenticated } = useContext(AuthenContext);
   const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
 
-  const product = products.find(p => p.id === parseInt(productId));
-  const isInCart = cart.some(item => item.id === product?.id);
+  const product = products.find((p) => p.id === parseInt(productId));
+  const isInCart = cart.some((item) => item.id === product?.id);
 
   if (!product) {
     return (
-      <div className={styles.errorContainer}>
-        <div className={styles.errorCard}>
-          <div className={styles.errorIcon}>❌</div>
+      <div className={styles.errorPage}>
+        <div className={styles.errorContent}>
+          <span className={styles.errorIcon}>✕</span>
           <h2>Product Not Found</h2>
           <p>The product you're looking for doesn't exist.</p>
-          <button onClick={() => Navigate('/product')} className={styles.backButton}>
-            Back to Products
-          </button>
+          <Link to="/product" className={styles.backBtn}>← Back to Products</Link>
         </div>
       </div>
     );
   }
 
   const handleAddToCart = () => {
-    if(!isAuthenticated) {
-      Navigate('/login', {state: {isBrowsing: true}})
-    } else {
-      if (isInCart) {
-        updateQuantity(product.id, quantity);
-      } else {
-        addToCart({ ...product, quantity });
-      }
-      setQuantity(1); 
-    }
+    if (!isAuthenticated) { Navigate('/login', { state: { isBrowsing: true } }); return; }
+    if (isInCart) { updateQuantity(product.id, quantity); } else { addToCart({ ...product, quantity }); }
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+    setQuantity(1);
   };
 
-  const handleCheckout = () => {
-    // Replace this with navigation or actual checkout logic
-    alert('Proceeding to checkout...');
-  };
-
-  const increaseQty = () => setQuantity(q => q + 1);
-  const decreaseQty = () => setQuantity(q => (q > 1 ? q - 1 : 1));
+  const relatedProducts = products.filter((p) => p.id !== product.id && p.featured).slice(0, 3);
 
   return (
-    <div className={styles.productDetailContainer}>
-      <div className={styles.productGrid}>
-        {/* Product Image Card */}
-        <div className={styles.imageCard}>
-          <div className={styles.cardHeader}>
-            <h2 className={styles.cardTitle}>Product Image</h2>
+    <motion.div
+      className={styles.container}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Breadcrumb */}
+      <nav className={styles.breadcrumb}>
+        <Link to="/">Home</Link>
+        <span> / </span>
+        <Link to="/product">Products</Link>
+        <span> / </span>
+        <span>{product.name}</span>
+      </nav>
+
+      <div className={styles.grid}>
+        {/* Image */}
+        <motion.div
+          className={styles.imagePanel}
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          <div className={styles.imageWrap}>
+            <img src={product.image} alt={product.name} className={styles.image} />
+            {product.featured && <span className={styles.featuredBadge}>★ Featured</span>}
           </div>
-          <div className={styles.cardBody}>
-            <img 
-              src={product.image} 
-              alt={product.name} 
-              className={styles.productImage} 
-            />
+        </motion.div>
+
+        {/* Info */}
+        <motion.div
+          className={styles.infoPanel}
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <span className={styles.category}>Premium Collection</span>
+          <h1 className={styles.name}>{product.name}</h1>
+
+          <div className={styles.rating}>
+            <span className={styles.stars}>{'★'.repeat(Math.floor(product.rating))}{'☆'.repeat(5 - Math.floor(product.rating))}</span>
+            <span className={styles.ratingText}>{product.rating} ({product.reviews} reviews)</span>
           </div>
-        </div>
 
-        {/* Product Info Card */}
-        <div className={styles.infoCard}>
-          <div className={styles.cardHeader}>
-            <h2 className={styles.cardTitle}>Product Details</h2>
+          <div className={styles.priceBlock}>
+            <span className={styles.price}>${product.price.toFixed(2)}</span>
+            <span className={styles.taxNote}>Inclusive of all taxes</span>
           </div>
-          <div className={styles.cardBody}>
-            <h1 className={styles.productTitle}>{product.name}</h1>
-            
-            <div className={styles.priceSection}>
-              <span className={styles.priceLabel}>Price:</span>
-              <span className={styles.productPrice}>${product.price.toFixed(2)}</span>
-            </div>
 
-            <div className={styles.ratingSection}>
-              <span className={styles.ratingLabel}>Rating:</span>
-              <div className={styles.productRating}>
-                <span className={styles.stars}>
-                  {'★'.repeat(Math.floor(product.rating))}
-                  {'☆'.repeat(5 - Math.floor(product.rating))}
-                </span>
-                <span className={styles.ratingText}>
-                  {product.rating.toFixed(1)} ({product.reviews} reviews)
-                </span>
-              </div>
-            </div>
+          <p className={styles.description}>{product.description}</p>
 
-            <div className={styles.descriptionSection}>
-              <h3 className={styles.descriptionTitle}>Description</h3>
-              <p className={styles.productDescription}>{product.description}</p>
+          <div className={styles.divider} />
+
+          {/* Quantity */}
+          <div className={styles.qtySection}>
+            <label className={styles.qtyLabel}>Quantity</label>
+            <div className={styles.qtyControl}>
+              <button className={styles.qtyBtn} onClick={() => setQuantity((q) => Math.max(1, q - 1))}>−</button>
+              <span className={styles.qtyDisplay}>{quantity}</span>
+              <button className={styles.qtyBtn} onClick={() => setQuantity((q) => q + 1)}>+</button>
             </div>
           </div>
-        </div>
 
-        {/* Action Card */}
-        <div className={styles.actionCard}>
-          <div className={styles.cardHeader}>
-            <h2 className={styles.cardTitle}>Purchase Options</h2>
+          {/* Total */}
+          <div className={styles.totalRow}>
+            <span>Total</span>
+            <span className={styles.total}>${(product.price * quantity).toFixed(2)}</span>
           </div>
-          <div className={styles.cardBody}>
-            <div className={styles.quantitySection}>
-              <label className={styles.quantityLabel}>Quantity:</label>
-              <div className={styles.quantityControl}>
-                <button 
-                  onClick={decreaseQty}
-                  className={styles.quantityBtn}
-                  disabled={quantity <= 1}
-                >
-                  −
-                </button>
-                <span className={styles.quantityDisplay}>{quantity}</span>
-                <button 
-                  onClick={increaseQty}
-                  className={styles.quantityBtn}
-                >
-                  +
-                </button>
-              </div>
-            </div>
 
-            <div className={styles.totalSection}>
-              <span className={styles.totalLabel}>Total:</span>
-              <span className={styles.totalPrice}>
-                ${(product.price * quantity).toFixed(2)}
-              </span>
-            </div>
-
-            <div className={styles.actionButtons}>
-              <button
-                className={styles.addToCartButton}
-                onClick={handleAddToCart}
-              >
-                {isInCart ? 'Update Cart' : 'Add to Cart'}
-              </button>
-
-              <button 
-                className={styles.checkoutButton} 
-                onClick={handleCheckout}
-              >
-                Buy Now
-              </button>
-            </div>
-
-            {!isAuthenticated && (
-              <div className={styles.loginPrompt}>
-                <p>Please log in to add items to your cart</p>
-              </div>
-            )}
+          {/* Actions */}
+          <div className={styles.actions}>
+            <button
+              className={`${styles.addCartBtn} ${added ? styles.added : ''}`}
+              onClick={handleAddToCart}
+            >
+              {added ? '✓ Updated in Cart' : isInCart ? 'Update Cart' : 'Add to Cart'}
+            </button>
+            <button className={styles.buyBtn} onClick={() => Navigate('/cart')}>
+              Buy Now
+            </button>
           </div>
-        </div>
+
+          {!isAuthenticated && (
+            <p className={styles.loginHint}>
+              <Link to="/login">Sign in</Link> to save items to your cart
+            </p>
+          )}
+        </motion.div>
       </div>
-    </div>
+
+      {/* Related Products */}
+      {relatedProducts.length > 0 && (
+        <section className={styles.related}>
+          <h2 className={styles.relatedTitle}>You May Also Like</h2>
+          <div className={styles.relatedGrid}>
+            {relatedProducts.map((p) => (
+              <Link key={p.id} to={`/product/${p.id}`} className={styles.relatedCard}>
+                <img src={p.image} alt={p.name} className={styles.relatedImg} />
+                <div className={styles.relatedInfo}>
+                  <span className={styles.relatedName}>{p.name}</span>
+                  <span className={styles.relatedPrice}>${p.price.toFixed(2)}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+    </motion.div>
   );
 }
 

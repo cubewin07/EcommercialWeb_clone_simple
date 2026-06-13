@@ -1,41 +1,40 @@
+/* NavigationButton — Luxe Noir */
 .navigationButton {
-    position: absolute;
-    top: 50%; /* Adjusted position to avoid covering images */
-    transform: translateY(-50%);
-    background-color: var(--primary);
-    color: var(--white);
-    border: none;
-    padding: 1rem 1.2rem; /* Increased padding for better click area */
-    font-size: 2rem;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 4.4rem;
+  height: 4.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  cursor: pointer;
+  z-index: 10;
+  transition: all var(--duration-fast) var(--ease-out-expo);
 
-    &:hover {
-      background-color: var(--primary-light);
-      transform: translateY(-50%) scale(1.2); /* Scale animation on hover */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect */
-    }
-
-    &:active {
-      transform: translateY(-50%) scale(1); /* Reset scale on click */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
-    }
+  &:hover {
+    color: var(--accent-teal);
+    border-color: var(--accent-teal);
+    background: rgba(45, 212, 191, 0.08);
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: var(--shadow-glow-teal);
   }
 
-  .prevButton {
-    left: -2rem; /* Adjusted to move outside the product card area */
-  }
-
-  .nextButton {
-    right: -2rem; /* Adjusted to move outside the product card area */
-  } 
-  .disabled {
-    // background-color: var(--gray-500); /* Gray color for disabled state */
-    // cursor: not-allowed; /* Change cursor to indicate disabled state */
-    // pointer-events: none; /* Disable pointer events */
-    // display: none;
+  &.disabled {
     opacity: 0;
-    transition: opacity 0.3s ease-in-out; /* Smooth transition for visibility */
- }
+    pointer-events: none;
+  }
+}
+
+.prevButton { left: -2.2rem; }
+.nextButton { right: -2.2rem; }
+
+@media (max-width: 768px) {
+  .prevButton { left: var(--space-2); }
+  .nextButton { right: var(--space-2); }
+  .navigationButton { top: 40%; }
+}
