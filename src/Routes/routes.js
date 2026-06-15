@@ -14,22 +14,15 @@ import NotFound404 from "../Pages/notFound404/NotFound404.js";
 import { AuthenContext } from "../contexts/AuthenProvider.js";
 
 function Private({children}) {
-    const navigate = useNavigate()
-    const {isAuthenticated} = useContext(AuthenContext)
+    const navigate = useNavigate();
+    const {isAuthenticated} = useContext(AuthenContext);
     useEffect(() => {
         if(!isAuthenticated) {
-            navigate('/login')
+            navigate('/login');
         }
-    },[isAuthenticated, navigate])
-    return isAuthenticated ? children : null
+    },[isAuthenticated, navigate]);
+    return isAuthenticated ? children : null;
 }
-
-// function Public({children}) {
-//     const navigate = useNavigate()
-//     const {isAuthenticated} = useContext(AuthenContext)
-
-//     return isAuthenticated ? null : children
-// }
 
 export const routes = createHashRouter([
     {
@@ -38,7 +31,7 @@ export const routes = createHashRouter([
         children: [
             { index: true, element: <Home /> },
             { path: "/product", element: <Product /> },
-            { path: "/product/:productId", element: <ProductDetail /> }, 
+            { path: "/product/:productId", element: <ProductDetail /> },
             { path: "/login", element: <Login />  },
             { path: "/user/dashboard", element: <Dashboard />},
             { path: '/user', element: <Dashboard />},
@@ -51,4 +44,4 @@ export const routes = createHashRouter([
         path: "*",
         element: <NotFound404 />
     }
-])
+]);

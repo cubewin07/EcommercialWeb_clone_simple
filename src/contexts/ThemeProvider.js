@@ -7,11 +7,17 @@ import {createTheme} from '@mui/material/styles';
 const ThemeContext = createContext()
 
 function ThemeProviderR({children}) {
-    const [mode, setMode] = useState('light');
+    const [mode, setMode] = useState('dark');
     const theme = createTheme({
         palette: {
-            mode
-        }
+            mode,
+            ...(mode === 'dark' && {
+                background: {
+                    default: '#0d1117',
+                    paper: '#161b22',
+                },
+            }),
+        },
     });
 
     const toggleMode =() => {

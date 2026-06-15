@@ -1,8 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './FeaturedProducts.module.scss';
-import NavigationButton from './NavigationButton/NavigationButton.js';
 import { ShoppingContext } from '../../../contexts/ShoppingProvider.js';
 import { AuthenContext } from '../../../contexts/AuthenProvider.js';
 
@@ -18,26 +17,25 @@ const FeaturedProductsData = [
   { id: 9, name: 'Product 9', price: 109.99, image: `${process.env.PUBLIC_URL}/assets/images/product9.jpg`, description: 'A product that sets new standards.', rating: 4.5, reviews: 190 },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.08,
+      duration: 0.55,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  }),
+};
+
 function FeaturedProducts() {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [addedId, setAddedId] = useState(null);
-  const productsPerPage = 3;
   const { addToCart } = useContext(ShoppingContext);
   const { isAuthenticated } = useContext(AuthenContext);
   const navigate = useNavigate();
-
-  const handleNext = () => {
-    if (currentIndex + productsPerPage < FeaturedProductsData.length) {
-      setCurrentIndex(currentIndex + productsPerPage);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentIndex - productsPerPage >= 0) {
-      setCurrentIndex(currentIndex - productsPerPage);
-    }
-  };
 
   const handleProductClick = (product) => navigate(`/product/${product.id}`);
 
@@ -49,125 +47,182 @@ function FeaturedProducts() {
     setTimeout(() => setAddedId(null), 2000);
   };
 
-  const containerVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.1 } },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-  };
-
   return (
     <>
       <section className={styles.section}>
+        {/* ── Section Header ── */}
         <motion.div
           className={styles.header}
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6 }}
         >
           <div>
-            <span className={styles.eyebrow}>Curated Selection</span>
-            <h2 className={styles.title}>Featured Products</h2>
+            <motion.span
+              className={styles.eyebrow}
+              initial={{ opacity: 0, x: -12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+            >
+              Curated Selection
+            </motion.span>
+            <h2 className={styles.title}>
+              Featured{' '}
+              <span className="gradient-text">Products</span>
+            </h2>
           </div>
           <p className={styles.subtitle}>
             Hand-picked items that combine exceptional quality with timeless design.
           </p>
         </motion.div>
 
-        <div className={styles.carouselWrap}>
-          <motion.div
-            className={styles.productList}
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-          >
-            {FeaturedProductsData.map((product) => (
-              <motion.div
-                key={product.id}
-                className={styles.productCard}
-                variants={itemVariants}
-                onClick={() => handleProductClick(product)}
-              >
-                <div className={styles.imageWrap}>
-                  <img src={product.image} alt={product.name} className={styles.image} />
-                  <div className={styles.imageOverlay} />
-                  <span className={styles.badge}>
-                    {product.featured ? '★ Featured' : '✦ New'}
+        {/* ── Product Grid ── */}
+        <motion.div
+          className={styles.productGrid}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+        >
+          {FeaturedProductsData.map((product, i) => (
+            <motion.div
+              key={product.id}
+              className={styles.productCard}
+              variants={cardVariants}
+              custom={i}
+              onClick={() => handleProductClick(product)}
+              whileHover={{ y: -6, transition: { type: 'spring', stiffness: 300, damping: 20 } }}
+            >
+              <div className={styles.imageWrap}>
+                <motion.img
+                  src={product.image}
+                  alt={product.name}
+                  className={styles.image}
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                />
+                <div className={styles.imageOverlay} />
+                {/* Badge */}
+                <motion.span
+                  className={styles.badge}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 + i * 0.05, type: 'spring', stiffness: 400, damping: 25 }}
+                >
+                  {product.featured ? '★ Featured' : '✦ New'}
+                </motion.span>
+                {/* Hover action */}
+                <div className={styles.hoverActions}>
+                  <button
+                    className={`${styles.addBtn} ${addedId === product.id ? styles.added : ''}`}
+                    onClick={(e) => handleAddToCart(e, product)}
+                  >
+                    {addedId === product.id ? (
+                      <motion.span
+                        key="added"
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        className={styles.addedText}
+                      >
+                        ✓ Added
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="add"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                      >
+                        + Add to Cart
+                      </motion.span>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              <div className={styles.info}>
+                <div className={styles.meta}>
+                  <span className={styles.category}>Category</span>
+                  <span className={styles.rating}>
+                    <span className={styles.stars}>{'★'.repeat(Math.floor(product.rating))}</span>
+                    <span className={styles.ratingNum}>{product.rating}</span>
+                    <span className={styles.reviewCount}>({product.reviews})</span>
                   </span>
-                  <div className={styles.hoverActions}>
-                    <button
-                      className={`${styles.addBtn} ${addedId === product.id ? styles.added : ''}`}
-                      onClick={(e) => handleAddToCart(e, product)}
-                    >
-                      {addedId === product.id ? '✓ Added' : '+ Add to Cart'}
-                    </button>
-                  </div>
                 </div>
-                <div className={styles.info}>
-                  <div className={styles.meta}>
-                    <span className={styles.category}>Category</span>
-                    <span className={styles.rating}>★ {product.rating} ({product.reviews})</span>
-                  </div>
-                  <h3 className={styles.name}>{product.name}</h3>
-                  <p className={styles.desc}>{product.description}</p>
-                  <div className={styles.footer}>
-                    <span className={styles.price}>${product.price.toFixed(2)}</span>
-                    <button
-                      className={styles.quickAdd}
-                      onClick={(e) => handleAddToCart(e, product)}
-                      aria-label="Add to cart"
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
-                        <path d="M1 1h4l2.2 13.3a1 1 0 0 0 1 .7h9.4a1 1 0 0 0 1-.8L23 6H6" />
-                      </svg>
-                    </button>
-                  </div>
+                <h3 className={styles.name}>{product.name}</h3>
+                <p className={styles.desc}>{product.description}</p>
+                <div className={styles.footer}>
+                  <span className={styles.price}>${product.price.toFixed(2)}</span>
+                  <motion.button
+                    className={styles.quickAdd}
+                    onClick={(e) => handleAddToCart(e, product)}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
+                    aria-label="Add to cart"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="9" cy="21" r="1" />
+                      <circle cx="20" cy="21" r="1" />
+                      <path d="M1 1h4l2.2 13.3a1 1 0 0 0 1 .7h9.4a1 1 0 0 0 1-.8L23 6H6" />
+                    </svg>
+                  </motion.button>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
-        <NavigationButton
-          disabledNext={currentIndex >= FeaturedProductsData.length - productsPerPage}
-          disabledPrev={currentIndex === 0}
-          handleNext={handleNext}
-          handlePrev={handlePrev}
-        />
-
-        <div className={styles.viewAll}>
+        {/* View All */}
+        <motion.div
+          className={styles.viewAll}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+        >
           <a href="/product" className={styles.viewAllBtn}>
             View All Products
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <motion.svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+              animate={{ x: [0, 4, 0] }}
+              transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+            >
               <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            </motion.svg>
           </a>
-        </div>
+        </motion.div>
       </section>
 
-      {showModal && (
-        <div className={styles.modalOverlay} onClick={() => setShowModal(false)}>
+      {/* Login Modal */}
+      <AnimatePresence>
+        {showModal && (
           <motion.div
-            className={styles.modal}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            onClick={(e) => e.stopPropagation()}
+            className={styles.modalOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowModal(false)}
           >
-            <h3>Sign In Required</h3>
-            <p>Please sign in to add items to your cart.</p>
-            <div className={styles.modalActions}>
-              <button onClick={() => setShowModal(false)} className={styles.cancelBtn}>Cancel</button>
-              <button onClick={() => { setShowModal(false); navigate('/login'); }} className={styles.signInBtn}>Sign In</button>
-            </div>
+            <motion.div
+              className={styles.modal}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className={styles.modalIcon}>🔒</div>
+              <h3 className={styles.modalTitle}>Sign In Required</h3>
+              <p>Please sign in to add items to your cart.</p>
+              <div className={styles.modalActions}>
+                <button onClick={() => setShowModal(false)} className={styles.cancelBtn}>Cancel</button>
+                <button onClick={() => { setShowModal(false); navigate('/login'); }} className={styles.signInBtn}>Sign In</button>
+              </div>
+            </motion.div>
           </motion.div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 }
